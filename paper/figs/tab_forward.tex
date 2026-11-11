@@ -1,0 +1,51 @@
+{\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}r L{2.4cm} L{2.4cm} L{3.1cm} L{2.3cm} L{2.4cm} L{1.9cm}@{}}
+\caption{Forward records for \nClasses{} problem classes (\texttt{forward\_classes.csv}). ``Resource evidence'' is in original units with coverage in brackets. The last three columns give the evidence that would favour the classical method ($\to$C), favour a quantum workflow ($\to$Q), or firm up the resource estimate ($\to$R). Each is a question that would change some assessment, not a sufficient condition for moving a whole class. Letter codes as in Fig.~\ref{fig:taxonomy}.}\label{tab:forward}\\
+\toprule
+\# & Class & Present status & Resource evidence [coverage] & $\to$C & $\to$Q & $\to$R\\
+\midrule\endfirsthead
+\toprule
+\# & Class & Present status & Resource evidence [coverage] & $\to$C & $\to$Q & $\to$R\\
+\midrule\endhead
+\bottomrule\endfoot
+1 & OTOC(2) scrambling, 2D & \psQ{} (\eld{E06} d), conditional & 65\,q measured; no FT compilation [\mtN] & Converged classical reproduction of the stated observable, depth and precision & Validated accuracy and full cost at larger scale & FT compilation\\
+2 & Operator Loschmidt echo & \psQ, conditional & 56\,q measured [\mtN] & Majorana/Pauli propagation converged over the full regime & Bounded-error estimator costed for the same regime & FT compilation\\
+3 & Floquet prethermal 2D magnetism: H2 and Heron instances & \psQ{} (\eld{E05} d; \eld{E23} d), two separate instances & 56\,q and 74\,q measured [\mtN] & Converged TN, NQS or Pauli-path result in the hardest regime of either instance & Validation across the hard regime, mitigation overhead costed & FT compilation\\
+4 & 2D TFIM dynamics, 100 spins, 10 Trotter steps & \psN & 230 LQ, $2.4\times10^6$ T per execution [\mtP] & Converged classical result for the stated time, state and observable & Costed estimation below classical & Repetitions, preparation\\
+5 & 3D spin-glass quenches & \psC{} (\mech{S}, \mech{V}), analog scope & Analog only [\mtN] & Stable long-time t-VMC or 3D BP-TN & Observables beyond classical coverage & Gate-model compilation\\
+6 & 2D frustrated $J_1$--$J_2$ Heisenberg, $10\times10$ cylinder & \psN{} (baseline is 4-core DMRG) & $5.6\times10^4$\,s single factory [\mtP] & NQS, PEPS or GPU DMRG on the same cylinder at $\epsilon=0.01$ total, with measured cost & Validated adiabatic preparation & Gap scaling\\
+7 & 2D Fermi--Hubbard energy, half filling & \psN{} (\mech{S}: sign-free; best classical baseline unresolved) & $1.05\times10^5$\,s at $10\times10$ vs 4-core DMRG $7.1\times10^9$\,s [\mtP] & QMC or parallel DMRG at $\epsilon=0.01$ total with measured time below the modelled schedule & Estimate below the best measured classical cost & Preparation\\
+8 & Strongly correlated materials & \psN & No multi-orbital estimate [\mtN] & Downfolded classical solution at decision accuracy & Multi-orbital estimate with downfolding error and decision tolerance & Multi-orbital estimate\\
+9 & Core-level XAS & \psN{} (resource-estimated candidate) & \xasCirc{} Toffoli longest circuit; \xasAlg{} total; \xasHours\,h at 1\,MHz [\mtC, assumptions unvalidated] & Classical spectrum at decision accuracy from the best available method & Validated preparation and error model, cost below that spectrum & Physical-level compilation\\
+10 & FeMoco precision and other models & \psN & Dense code: \femoT\,h expected at \femoSevMinvolQ\,M physical, \femoTofMinvol{} Toffoli; THC $3.2\times10^{10}$ Toffoli [\mtP] & Classical estimate at matched confidence for larger models & Measured overlap; complete protocol & Larger-model counts\\
+11 & P450 Cpd I spin gaps & \psN & 2022: $7.8\times10^9$ Toffoli, 73\,h; 2026: \pfMinvolH\,h at 1.03\,M physical [\mtP] & Converged classical spin gap at a stated tolerance & Cost for both spin states with error cancellation & Preparation, success criterion and both spin states on an architecture\\
+12 & Ru CO$_2$-fixation catalysts & \psN & 2740 LQ, $5.4\times10^{11}$ T (older model); 56-orbital model 0.46\,h at 1.57\,M physical [\mtP] & Classical multireference result & Model-specific modern count & Modern count, older model\\
+13 & Transition-metal ML labels & \psN & --- [\mtN] & Classical labels adequate & Incremental value of better labels against the downstream error budget & Label cost\\
+14 & Enzyme active sites & \psN & No estimate for a named cluster [\mtN] & Embedding with a classical or neural solver adequate for a named cluster and observable & Solver error dominating a validated budget & Embedded estimates\\
+15 & Learning from quantum data & \psT{} (quantum-side sample-complexity separation) & Separation with quantum memory~\cite{huang2022exp} [n/a] & Equivalent classical access model & Task demonstrations at scale & Copies, memory, access\\
+16 & Real-time SU(3) gauge theory & \psN & $10^9$--$6.5\times10^{48}$ T across formulations, evolution only [\mtS] & Classical real-time method for a controlled physical observable & Controlled-truncation estimate incl.\ preparation and measurement & Single formulation, full observable\\
+17 & Sampling capability: RCS, GBS, doped Clifford, analog atoms & \psCap & --- & --- & --- & ---\\
+18 & SQD, single-layer circuit-energy objective & \psM{} (\mech{B}); workflow as a whole \psN & --- & --- & Sampler ablation under a common selection, recovery and diagonalization procedure & ---\\
+19 & FeMoco-76 model energy & \psV{} (feasibility, extrapolation-dependent; operational ranking unresolved) & --- & --- & --- (a failed estimate would reopen the comparison) & ---\\
+20 & P450 $\sim$500-orbital model & \psN & 9000 LQ, $1.5\times10^{12}$ Toffoli [\mtP] & Embedding solves the decision & A gap or decision target with a complete comparison & Modern count\\
+21 & Generic ground-state chemistry & \psN & --- [\mtN] & --- & Representative family, fixed accuracy, with empirical or proven exponential classical scaling & ---\\
+22 & Main-group thermochemistry & \psV{} (named benchmarks; \mech{R}) & --- & --- & Validated-domain failure with consequence (a solver need, not yet a quantum result) & ---\\
+23 & Rydberg topological diagnostics & \psN & --- [\mtN] & --- & A matched computational task & Measurement cost\\
+24 & High-throughput materials discovery & \psV{} (\mech{A}; experimentally validated~\cite{chen2024}) & --- & --- & Decision-critical electronic-structure bottleneck identified & Bottleneck estimate\\
+25 & Binding free energies, MD & \psV{} (mature practice; \mech{A}); one unmatched hybrid workflow~\cite{merz2026} & --- & --- & Quantum subproblem dominating the budget, shown by ablation & Subproblem estimate\\
+26 & Property learning within a phase & \psT{} (classical-side guarantee in theorem scope; \mech{A}) & --- & --- & Labels unobtainable classically & ---\\
+27 & Protein structure prediction, proteome scale & \psV{} (\mech{R}); fragments are a separate record & --- & --- & Fragment gain under identical selection and cost rules & ---\\
+28 & Generative molecular design & \psN & --- [\mtN] & Matched ablation shows no gain & Matched ablation incl.\ downstream selection shows gain & ---\\
+29 & Unstructured search & \psT{} (conditional model; query-model limit~\cite{turturean2026}; \mech{H}) & Model only [\mtS] & --- & $t_Q\lesssim10\,\mu$s with $Q\gg1$ within a stated latency, or a structured speedup & Oracle estimate\\
+30 & Approximate optimization: annealing (QAC) and Rydberg MIS & \psC, family-specific & QAC $>$1300 encoded variables; Rydberg $\le$289\,q [\mtN] & Classical portfolio matches scaling on the defined family & Separation vs the full portfolio with stated runtime accounting & ---\\
+31 & QML on classical data & \psN & Constructed separations~\cite{liu2021} [\mtN] & --- & Practical separation on a stated workload and access model & ---\\
+32 & Nuclear ground states, $A\le20$ & \psV{} (cited interactions; \mech{V}); no quantum comparator identified & --- & --- & A quantum comparator in scope at matched precision & ---\\
+33 & Euclidean lattice QCD, zero density & \psV{} (mature practice); no demonstrated practical matched quantum advantage & Small-model sampling proposal~\cite{yamamoto2022} [\mtN] & --- & Lower autocorrelation and full observable cost than modern HMC at relevant lattice spacing & ---\\
+34 & CFD: full field / selected outputs & \psV{} (full field: no costed quantum workflow) / selected outputs: see class 38 & Bounded advantage, modest for selected observables~\cite{jennings2025} [\mtS] & --- & Selected-observable workload with value and an end-to-end cost below explicit classical CFD & Selected-output estimate at an engineering Reynolds number\\
+35 & Weather/climate: forecasts / statistics & \psV{} per named forecast or component / \psN & --- [\mtN] & --- & A named component with a costed advantage & Component estimate\\
+36 & Doped 2D Fermi--Hubbard (sign-problem instances) & \psN{} (new record) & --- [\mtN] & NQS, PEPS, constrained-path or embedding result at stated density, $U/t$, $t'$ and tolerance, with measured cost & Costed QPE estimate for the same instance & Doped-lattice estimate\\
+37 & Quantum-enhanced MCMC sampling & \psN{} (conditional candidate) & Proposals and early hardware experiments~\cite{layden2023,marshall2026} [\mtN] & Classical nonlocal updates matching time per independent sample & Lower time per independent sample incl.\ proposal generation and noise & Proposal circuit cost\\
+38 & Sparse linear solves and time stepping for engineering PDEs (FEM, CFD) & \psT{} (at most polynomial speedup in fixed dimension~\cite{montanaro2016}; \mech{IO}, \mech{H}) & $10^{21}$--$10^{39}$ logical qubits $\times$ T gates for drag on a sphere~\cite{penuel2025}; depth $1.8\times10^{29}$ for EM scattering~\cite{scherer2017}; one crossover at $2^{80}$ grid points~\cite{zhuang2025} [\mtP] & --- (classical practice is the incumbent) & A high-dimensional or quantum-native linear problem with scalar output and an end-to-end cost below tuned multigrid or Monte Carlo & Constant-factor estimate at industrial condition numbers with input and readout\\
+\end{longtable}
+}

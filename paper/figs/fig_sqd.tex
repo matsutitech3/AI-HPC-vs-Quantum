@@ -1,0 +1,15 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1, horizontal sep=2.0cm}, width=0.43\textwidth, height=5.4cm, ticklabel style={font=\footnotesize}, label style={font=\footnotesize}, title style={font=\footnotesize, align=center}]
+\nextgroupplot[ybar, ymin=0, ymax=60000, xtick={1,2}, xticklabels={QSCI, HCI}, xmin=0.3, xmax=2.7, bar width=22pt, ylabel={Determinants}, title={[2Fe-2S] at 0.1\,Ha ($\approx$63\,kcal/mol):\\ideal QSCI vs HCI}, nodes near coords, every node near coord/.append style={font=\scriptsize}, scaled y ticks=false, yticklabel style={/pgf/number format/fixed}]
+\addplot[fill=qcF, draw=none] table[x=x,y=y] {figdata/sqd_dets.dat};
+\nextgroupplot[xmode=log, ymode=log, xmin=1e2, xmax=1e15, ymin=1e-6, ymax=1, xlabel={Shots}, ylabel={New determinants per shot}, title={N$_2$ CAS(10e,12o) discovery rate}, grid=major, grid style={black!10}]
+\addplot[only marks, mark=*, color=qcF, mark size=2.5pt, nodes near coords={\pgfmathprintnumber[sci,precision=1]{\pgfplotspointmeta}}, point meta=rawy, every node near coord/.append style={font=\scriptsize, anchor=south west}] table[x=x,y=y] {figdata/sqd_rate.dat};
+\addplot[dashed, black!40] table[x=x,y=y] {figdata/sqd_interp.dat};
+\input{figdata/sqd_annot.tex}
+\end{groupplot}
+\end{tikzpicture}
+\caption[QSCI compactness and sampling]{Quantum-selected CI against classical selected CI, from Reinholdt et al.~\cite{reinholdt2025} (values in \texttt{values.csv}). Left: determinant counts at a 0.1\,Ha error ($\approx$63\,kcal/mol) for ideal ground-state-distribution QSCI versus heat-bath CI with a chemically informed start, in individually selected determinants. This is not a chemical-accuracy comparison and not the count of the hardware SQD experiment, which uses spin-string product subspaces. Right: determinant discovery per shot for N$_2$ (two published points; the dashed line only interpolates between them). The vertical line marks the source's own estimate of $4\times10^{14}$ samples for micro-hartree precision; the discovery-rate curve does not by itself determine energy error, and micro-hartree precision is one example and not the requirement of every application.}
+\label{fig:sqd}
+\end{figure}

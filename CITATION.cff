@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this survey or its evidence ledger, please cite the version you used."
+title: "AI+HPC versus Quantum Computing on the Same Scientific Problems: Matched Tasks, Complete Costs and Conditional Opportunities"
+type: report
+authors:
+  - family-names: Matsuoka
+    given-names: Satoshi
+    affiliation: "RIKEN Center for Computational Science (R-CCS)"
+version: "8.2"
+date-released: "2026-11-11"

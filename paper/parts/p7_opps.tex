@@ -1,0 +1,52 @@
+% =====================================================================
+\section{Opportunities and the evidence each needs}
+\label{sec:opps}
+
+We assess \nClasses{} problem classes on two independent questions: what is the present comparative status, and how much of a quantum protocol has been costed. The full records, with the specific results that would move each one, are in Appendix~\ref{app:forward}. Of these, \nFstanding{} are standing device claims, \nFcontested{} are contested, \nFtheory{} have a status set by theory, \nFnotcompared{} have no matched comparison, \nFclasscap{} are demonstrated classical capabilities without a matched quantum workflow, and one each is a scoped matched result and a capability benchmark. Partial resource estimates exist for \nMpartial{} classes, and an estimate complete at the logical level for one. These are counts of labels in a curated and overlapping set, not a distribution of scientific opportunity.
+
+\subsection{Where a quantum contribution is plausible}
+Table~\ref{tab:opps} selects six. Each is conditional, and for each the missing evidence is specific.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Selected candidates for a quantum contribution and the evidence that would decide each. Class numbers refer to Appendix~\ref{app:forward}.}\label{tab:opps}
+\begin{tabular}{@{}L{3.3cm} L{5.8cm} L{6.7cm}@{}}
+\toprule
+Candidate & Why it is a candidate & Decisive open evidence\\\midrule
+Coherent dynamics in two dimensions (classes 1--4) & Device claims stand where tested classical methods do not converge; a fault-tolerant estimate exists at 230 logical qubits and $2.4\times10^6$ T gates per execution & Device accuracy validated across the hard regime with mitigation cost included; repetitions and preparation costed; a classical convergence test at the same size and depth\\
+Doped and frustrated lattice models (classes 6, 36) & The sign problem returns away from half filling; modelled quantum schedules run in hours & Neural-state, tensor-network or embedding results on the same instance and tolerance with measured cost; a costed preparation\\
+Multireference chemistry beyond solved benchmarks (classes 10, 11, 14, 20) & Selected modelled estimates of hours on one to three million physical qubits, each for one energy of a named active-space model with preparation excluded; DMRG cost rises steeply with active-space size & A measured or bounded initial-state overlap; a target with decision value (a gap or barrier, not one energy); a classical result at matched confidence on a larger model\\
+Core-level and excited-state spectroscopy (class 9) & One estimate covers its protocol end to end at the logical level & A classical spectrum for the same cluster; validated initial state and error model; a machine with the assumed logical clock\\
+Real-time and finite-density gauge theory (class 16) & Importance sampling faces severe sign or phase problems, and no general classical method with established accuracy and cost is known for the three-dimensional target & One formulation with a controlled truncation, with preparation and measurement costed for a physical observable\\
+Quantum data and labels (classes 13, 15) & A proven advantage in the number of experiments needed for some learning tasks with quantum memory; accurate labels are scarce for correlated chemistry & A task-level demonstration at scale; shown value of better labels against the downstream error budget\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Three patterns hold across these candidates. No class carries an unqualified lead in either direction: classical results are capabilities for a task, tolerance and workflow, and the one matched comparison that favours the classical side concerns a narrowly stated objective. Every candidate with a resource estimate involves coherent dynamics, strong correlation or core-excited states. And validation of assumptions, not coverage, is the binding gap: no estimate has a measured overlap, a tested error model at scale or a comparison with a best-effort classical baseline on the same instance.
+
+\subsection{Where the evidence points away}
+\begin{itemize}
+\item \textbf{Sparse linear solves, finite elements and fluid dynamics} (class 38). The speedup is at most polynomial in fixed dimension, published estimates for specific algorithms are tens of orders of magnitude from feasibility, and the classical incumbent is strong and improving (Section~\ref{sec:linear}). On present evidence we judge quantum linear solvers unlikely to accelerate engineering linear algebra as it is practised. This is an assessment of the reviewed literature and not a theorem: structured inputs and selected observables leave conditional polynomial opportunities, and the test set out below would change the assessment.
+\item \textbf{Unstructured search and other quadratic speedups} (class 29). The break-even runtime is days to years at realistic logical speeds against a parallel classical machine (Section~\ref{sec:breakeven}).
+\item \textbf{Machine learning on classical data with low-rank structure} (class 31). Several proposed exponential speedups disappear when the classical algorithm is given comparable access to the data~\cite{tang2021,tang2023}. Problems as hard as general quantum computation cannot be treated this way, and rigorous separations exist for constructed tasks~\cite{liu2021}, so this is a statement about the workloads reviewed and not a general impossibility.
+\item \textbf{High-throughput screening, structure prediction and full-field forecasting} (classes 24, 27, 34, 35). These are validated classical practice with no costed quantum workflow that delivers the same product. A quantum comparison first needs a named bottleneck inside them.
+\end{itemize}
+In each of these a specific result would reopen the question, and Appendix~\ref{app:forward} states it.
+
+\paragraph{Immediate future work: a compressed classical baseline for Navier--Stokes.} The decisive test for the one application-specific crossover of Section~\ref{sec:linear} is classical and can be run now. We plan it as the immediate follow-up to this survey; it is not part of it. Take the source's initial data, forcing, boundaries, time horizon and error norm. Solve with a Fourier or other spectral representation whose mode count adapts to the solution, at mesh sizes where a resolved reference is affordable, and with a spectral Newton--Krylov or time-stepping solver, not only a dense-grid model. Record retained modes, residual, observable error, nonlinear mode generation, wall time and conditioning as resolution and evolution time grow. If the field stays compact and the classical solve is cheap, the claimed comparison weakens. If modes proliferate, the quantum proposal owes a readout and preparation cost it has not counted. A regime with validated compact quantum access and a well-supported classical bottleneck would be the informative positive result. Two further tests need only public data: a preconditioning study on the published industrial CFD matrices with the preprocessing credited to both sides~\cite{lapworth2025}, and a sweep of preparation tolerance and condition number on the hybrid nozzle solver at fixed application error~\cite{goldfriend2026}.
+
+\subsection{What a fair comparison reports}
+\begin{itemize}
+\item The output, tolerance, failure probability and workload, the level at which two computations are ``the same'' and the kind of match claimed (Section~\ref{sec:compare}).
+\item The strongest classical method for the chosen instance, including sign-free Monte Carlo sectors, structure-aware tensor networks, neural quantum states and GPU implementations, and the machine it ran on.
+\item Complete costs on both sides (Eqs.~\ref{eq:tck}--\ref{eq:tqk}), with measured, estimated, idealized and scenario values marked.
+\item Success semantics: the useful event, a lower bound on its probability if a guarantee is claimed, how the failure budget is divided, and whether retries are already in the runtime (Section~\ref{sec:qpe}); and the basis of the classical uncertainty.
+\item The source version and a table or section locator for every number.
+\item Ablations: quantum samples replaced by classical ones; a learned model replaced by the best structured method.
+\item Circuits, Hamiltonians and raw data, published to an open tracker with a fixed challenge window~\cite{pq_ibm3}.
+\end{itemize}
+
+\subsection{Implications for computing strategy}
+\label{sec:strategy}
+This subsection is the author's perspective. It is informed by the evidence above, and a survey with no cost--benefit experiment cannot establish an optimal architecture or procurement mix; that would need reliability, queueing, energy, utilization and staffing data that we do not have. On current evidence, sustained investment in classical algorithms, AI methods and rigorous benchmarking alongside targeted quantum development is well supported, with quantum processors integrated where a defined bottleneck exists and their contribution can be isolated. Three recommendations follow directly from the cases reviewed. Every hybrid workflow should include an ablation that shows whether the quantum processor changes the answer or its cost. The assumptions behind resource estimates (overlaps, error models, clock rates) should be measured before the estimates are used for planning. And classical challengers to quantum claims deserve dedicated support, with modern baselines on current machines, because they are a main source of truth about advantage.

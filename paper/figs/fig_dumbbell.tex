@@ -1,0 +1,29 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  xmode=log, width=0.56\textwidth, height=8.0cm,
+  xmin=0.2, xmax=3e7, ymin=0.4, ymax=5.6, y dir=reverse,
+  ytick={1,...,5},
+  yticklabels={{Fermi--Hubbard 6$\times$6, half filling\\{\scriptsize\color{black!60} model schedule vs 4-core DMRG estimate}}, {Fermi--Hubbard 10$\times$10, half filling\\{\scriptsize\color{black!60} model schedule vs 4-core DMRG estimate}}, {$J_1$--$J_2$ Heisenberg 10$\times$10\\{\scriptsize\color{black!60} model schedule vs 4-core DMRG estimate}}, {FeMoco, 76 orbitals, 1 kcal/mol\\{\scriptsize\color{black!60} model expectation vs idealized estimate, not run}}, {P450 compound I, 58 orbitals\\{\scriptsize\color{black!60} model expectation vs 2022 source estimate}}},
+  yticklabel style={font=\footnotesize, align=right},
+  xlabel={\footnotesize Published time estimate (hours, log scale)},
+  xticklabel style={font=\footnotesize},
+  xmajorgrids, grid style={black!10}, axis y line*=left, axis x line*=bottom, clip=false,
+  legend style={font=\scriptsize, at={(0.5,-0.15)}, anchor=north, draw=black!25, fill=white, legend columns=2}, legend cell align=left]
+\input{figdata/dumbbell_annot.tex}
+\addplot[only marks, mark=o, mark size=3pt, color=qcF, line width=1pt] table[x=x,y=y] {figdata/dumbbell_q_est.dat};
+\addlegendentry{quantum, modelled schedule}
+\addplot[only marks, mark=triangle, mark size=3.2pt, color=qcF, line width=0.9pt] table[x=x,y=y] {figdata/dumbbell_q_par.dat};
+\addlegendentry{quantum, alternative schedule}
+\addplot[only marks, mark=diamond, mark size=3.4pt, color=qcU, line width=1pt] table[x=x,y=y] {figdata/dumbbell_q_scen.dat};
+\addlegendentry{quantum, repetition scenario (ours)}
+\addplot[only marks, mark=square, mark size=2.8pt, color=black!65, line width=1pt] table[x=x,y=y] {figdata/dumbbell_c_est.dat};
+\addlegendentry{classical, estimate}
+\input{figdata/dumbbell_labels.tex}
+\node[font=\scriptsize, anchor=west, qcUd] at (axis cs:60,4.02) {\repAttempts{} or \repAttemptsSplit{} accepted runs: \repHours, \repHoursSplit\,h};
+\end{axis}
+\end{tikzpicture}
+\caption[Modelled quantum and estimated classical times]{Modelled quantum times and estimated classical times for five cases in which both sides publish a value for one model and tolerance. No point is a measured runtime, and the type of each value is printed under its row. \emph{Lattice models:} circles are the single-factory phase-estimation schedules of the source's Table~S12 and triangles its 16-factory schedules, which use \parQubitLo--\parQubitHi{} times the physical qubits; squares are the source's DMRG estimates on four cores of one CPU for a variational state within 0.01 of the extrapolated energy~\cite{yoshioka2024}. \emph{FeMoco:} circle and triangle are the minimum-volume and fastest tabulated rows of the 2026 dense-code compilation~\cite{low2026dense}, each an expected duration that already includes repeats after detected logical failure; diamonds are our scenario for \repAttempts{} or \repAttemptsSplit{} accepted executions at a hypothetical hit probability of 0.5 (Section~\ref{sec:qpe}); the square is an idealized conversion for a DMRG calculation that was not performed~\cite{zhai2026}. \emph{P450:} circles are the 2022 estimates at physical error rates $10^{-3}$ and $10^{-5}$~\cite{goings2022}, triangles the 2026 rows~\cite{low2026dense}, and the square the 2022 source's own classical estimate. A connector shows that two values refer to one model. It implies no ranking where the two sides differ in confidence semantics or machine assumptions. Generated from the ledger.}
+\label{fig:dumbbell}
+\end{figure}

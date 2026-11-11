@@ -1,0 +1,57 @@
+{\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}r L{0.7cm} L{2.25cm} L{1.9cm} L{3.1cm} L{3.4cm} L{1.85cm} L{1.3cm}@{}}
+\caption{The \nEntries{} evidence entries (status as of 11 November 2026). Type: E1 device comparison, E2 resource estimate, E3 theory, E4 context (Section~\ref{sec:types}). Method class: AI = learned; CV = classical variational; SC = structured numerical. ``Resource'' gives the coverage of the linked problem class in Table~\ref{tab:forward}; ``---'' where the entry has no forward task. Entry numbers are stable identifiers (\#$n$ is E$n$ in the ledger). Dates of claims and responses, tolerances and workloads are in \texttt{entries.csv}.}\label{tab:master}\\
+\toprule
+\# & Type & Problem & Quantum side & Classical/AI counter (class) & Accuracy and cost & Present result & Resource\\
+\midrule\endfirsthead
+\toprule
+\# & Type & Problem & Quantum side & Classical/AI counter (class) & Accuracy and cost & Present result & Resource\\
+\midrule\endhead
+\bottomrule\endfoot
+\multicolumn{8}{@{}l}{\textit{Quantum many-body physics and optics}}\\
+1 & E1 & Random circuit sampling, 53\,q & Google Sycamore, 2019 & Tensor-network contraction (SC)~\cite{pan2022,hangleiter2026} & Samples at comparable XEB; later RCS experiments not entered individually & Validation benchmark matched & ---\\
+2 & E1 & Gaussian boson sampling, Jiuzhang 2.0 & USTC, 2021~\cite{zhong2021} & Marginal-based mock-up samplers~\cite{villalonga2021}; later a tensor-network algorithm~\cite{oh2024} (SC) & Mock-up closer than the experiment to the ideal marginals (\eld{E02} d); benchmark statistics outperformed in 2023; quantum model favoured over a squashed-state alternative~\cite{martinez2023} & Validation statistic challenged, later matched & ---\\
+3 & E1 & Kicked Ising, 127\,q, 20 steps & IBM Eagle, 2023 & BP tensor networks~\cite{tindall2024}; sparse Pauli dynamics~\cite{begusic2023,begusic2024} (SC) & Ideal-circuit observables within or below experimental error; one laptop core & Observables reproduced & class \#4: \mtP\\
+4 & E1 & Spin-glass annealing dynamics, 2D/3D & D-Wave Advantage2~\cite{king2025} & BP-TN~\cite{tindall2025} (SC); Jastrow--Feenberg t-VMC to 128 spins~\cite{mauron2025} (CV) & Lower error than QPU in some regimes; not all observables~\cite{kingreply} & Partly reproduced; \psC & \mtN\\
+5 & E1 & 2D TFIM Floquet prethermalization, 56\,q & Quantinuum H2~\cite{haghshenas2025} & TN, NN, operator truncation (SC+AI) & No tested method converged in the hardest regime & \psQ{} (\eld{E05} d) & \mtN\\
+6 & E1 & OTOC(2), 65\,q & Google Willow~\cite{google2025otoc} & TN contraction, TNMC, TNBP (SC)~\cite{bermejo2026} & 2.1\,h of data collection per circuit (measured) against 3.2\,y on Frontier per circuit (cost model); accuracy at 65 qubits from an error model & \psQ{} (\eld{E06} d) & \mtN\\
+7 & E1 & Operator Loschmidt echo, 56\,q & IBM Heron + Algorithmiq~\cite{barron2026} & Three classical groups (SC) & Classical predictions mutually inconsistent & \psQ{} (preprint) & \mtN\\
+8 & E4 & Rydberg spin-liquid diagnostics & Harvard simulator, 2021 & Time-dependent VMC (CV)~\cite{mauron2025tee} & R\'enyi TEE $\approx$0.48 vs $\ln2$; topological order without RVB TEE & Comple\-mentary inference & \mtN\\
+\multicolumn{8}{@{}l}{\textit{Quantum chemistry and electronic structure}}\\
+9 & E1 & Fe--S clusters by SQD & IBM Heron + Fugaku~\cite{shirakawa2025} & Selected CI; single-layer UCJ energy evaluation~\cite{belagali2026}; GPU DMRG~\cite{legeza2026} (SC); ML selectors (AI) & Ideal QSCI 50{,}551 vs HCI 4{,}260 dets at 0.1\,Ha error~\cite{reinholdt2025}; single-layer [4Fe-4S] energy on a laptop $<$1\,min; CAS(54,36) DMRG in \feDmrgH\,h on one GPU node & No advantage claimed; \psM{} for the single-layer energy objective & ---\\
+10 & E2 & FeMoco 76-orbital model & THC~\cite{lee2021thc}; dense code~\cite{low2026dense} & UDMRG + UCCSDTQ~\cite{zhai2026} (SC) & $\pm$0.31 (consensus) / $\pm$1.25 (conservative) kcal/mol, extrapolation-dependent; quantum \femoT\,h expected per accepted run & Classical feasibility; operational ranking unresolved & class \#10: \mtP\\
+11 & E3 & Generic ground-state chemistry & QPE hypothesis & Empirical complexity of classical heuristics~\cite{lee2023} (SC) & No evidence of generic exponential separation in studied classes & Theory & \mtN\\
+12 & E4 & Main-group thermochemistry & --- & Skala XC functional~\cite{luise2025} (AI) & W4-17 at chemical accuracy; GMTKN55 WTMAD-2 3.89 (v1.0), 2.72 (v1.1) kcal/mol & No quantum comparator & ---\\
+\multicolumn{8}{@{}l}{\textit{Materials}}\\
+13 & E4 & Solid-electrolyte discovery & --- & ML+DFT+MD on $\sim$1{,}000 cloud VMs (AI)~\cite{chen2024} & 32.6\,M $\to$ 18 candidates in $<$80\,h; Na$_x$Li$_{3-x}$YCl$_6$ synthesized, conductivity measured & Validated classical result & ---\\
+14 & E4 & Crystal stability at scale & --- & GNoME~\cite{merchant2023} (AI) & 2.2\,M stable vs prior data; $\sim$381{,}000 on updated hull & No quantum comparator & ---\\
+\multicolumn{8}{@{}l}{\textit{Life sciences}}\\
+15 & E1 & Lattice protein folding & VQE, 9--127\,q~\cite{robert2021,doga2024,zhang2026} & Exhaustive/Gurobi on same Hamiltonian (SC) & RMSD 1.781\,\AA{} (quantum best) vs 1.879\,\AA{} (classical model optimum) vs 3.53\,\AA{} (AF2) & Objectives differ; no computational advantage shown & ---\\
+16 & E1 & KRAS inhibitor generation & QCBM+LSTM, IBM~\cite{kras2025} & Classical generative priors (AI) & Modest benchmark gain; no superiority claimed~\cite{uoft2025} & Quantum contribution unisolated & \mtN\\
+\multicolumn{8}{@{}l}{\textit{Optimization}}\\
+17 & E4 & Spin-glass ground states & Simulated QA (emulation) & Variational neural annealing~\cite{hibat2021} (AI) & Beats SA and SQA over studied sizes & No hardware comparator & ---\\
+18 & E1 & Approx.\ optimization, 2D spin glass & D-Wave + QAC~\cite{munoz2025} & PT-ICM; simulated bifurcation~\cite{pawlowski2026} (SC) & QAC scaling advantage vs PT-ICM at gap $\ge$1\%; follow-up finds no clear advantage vs SBM & \psC & \mtN\\
+27 & E1 & Maximum independent set, $\le$289\,q & Harvard Rydberg array~\cite{ebadi2022} & Exact and heuristic solvers; relaxed SA (SC)~\cite{andrist2023} & Superlinear speedup claimed vs SA on hardest graphs; quasi-planar instances solved to optimality at thousands of nodes in minutes & \psC & \mtN\\
+19 & E4 & MIS on $10^6$-node graphs (control) & --- & Physics-inspired GNN vs greedy~\cite{angelini2022,schuetz2023} & Greedy $10^4\times$ faster and better on sparse MIS & Benchmarking control & ---\\
+\multicolumn{8}{@{}l}{\textit{Machine learning theory}}\\
+20 & E3 & Recommendation, PCA, low-rank SDP & Quantum linear algebra & Dequantized sampling~\cite{tang2023,tang2021} (SC) & Polynomial slowdown under $\ell^2$ sampling access & Theory & \mtN\\
+21 & E3 & Ground-state properties within a phase & QC simulation target & Classical ML on classical shadows~\cite{huang2022} (AI) & Efficient after data access, gapped within-phase assumptions & Theory & ---\\
+\multicolumn{8}{@{}l}{\textit{Nuclear physics}}\\
+22 & E4 & Nuclear ground states, $A\le20$ & Few-nucleon QC demos & NQS VMC to $^{16}$O and $A{=}20$~\cite{lovato2022,gnech2024,lovato2026} (AI) & Energies, radii, magnetic moments for cited interactions & No matched comparator & ---\\
+\multicolumn{8}{@{}l}{\textit{Further device, workflow and theory entries}}\\
+23 & E1 & Heavy-hex Floquet magnetization, $\le$74\,q & IBM Heron + QESEM~\cite{leviatan2026} & Tensor networks; sparse Pauli-path on GPUs and Fugaku (SC) & Authors: TN not converged, Pauli-path truncation-dependent; unbiased and extrapolated estimators agree where both exist; cross-platform checks at selected cycles & \psQ{} (\eld{E23} d) & \mtN\\
+24 & E1 & Doped Clifford sampling, 70\,q (original) & IBM Heron, spacetime codes~\cite{martiel2026} & Tensor-network contraction (SC)~\cite{manabe2026} & Amplitudes of the 2{,}051 published bitstring batches in \dcMin\,min on 256 H100 GPUs & Validation benchmark matched (16 d) & ---\\
+25 & E1 & Doped Clifford sampling, 64\,q (revised) & IBM Heron; depth 73, 314 T, periodic boundaries~\cite{martiel2026} & None found & Fidelity lower bound 0.349 (95\%) per authors; periodic boundaries remove the contraction path of \#24 & \psQ{} (\eld{E25} d) & ---\\
+26 & E1 & Driven Bose--Hubbard sampling, 64 sites, 20 atoms (version of April 2026) & USTC quantum gas microscope~\cite{zheng2026} & Tensor networks (authors' comparison) & Authors: sampling rate $10^3\times$ a supercomputer; validated by Bayesian tests & \psQ{} (\eld{E26} d) & ---\\
+28 & E1 & Embedded protein--ligand electronic structure & Two IBM Heron r2, $\le$94\,q; \merzQpu\,QPU-h~\cite{merz2026} & SCI, DMRG, CCSD on fragments (SC) & Fragment errors 0.10--2.3\,mHa vs DMRG; SCI better on one fragment; no sampler ablation & No advantage claimed & ---\\
+29 & E4 & Frustrated and doped lattice models & --- & Transformer NQS~\cite{rende2024,gu2026} (AI) & $J_1$--$J_2$ $10\times10$: $E/N=-0.497634(1)$, below DMRG; 4 days on 20 A100 GPUs & No matched comparator & classes \#6, 36\\
+30 & E4 & Molecular excited states & --- & Neural-network VMC~\cite{pfau2024,schatzle2026} (AI) & Excited states and transition observables; numbers not extracted & No matched comparator & ---\\
+31 & E3 & Unstructured decision problems, query model & Any $T$-query algorithm & Classical queries to influential variables~\cite{aa2014,turturean2026} (SC) & $\le(4T)^8\epsilon^{-14}\delta^{-8}$ classical queries on all but a $\delta$ fraction of inputs & Theory; claimed proof, machine-checked core & class \#29\\
+32 & E3 & Engineering PDEs by quantum linear and differential-equation solvers & HHL/QSVT; quantum ODE solvers; Carleman linearization & Multigrid and Krylov solvers; explicit time stepping; Monte Carlo (SC)~\cite{montanaro2016,linden2022,an2025,lewis2024} & At most polynomial speedup in fixed dimension; overheads from dissipation, non-normality and strong nonlinearity & Theory & class \#38\\
+33 & E2 & Drag force by quantum lattice-Boltzmann solvers & Resource estimates~\cite{penuel2025,jennings2025,zhuang2025} & Explicit classical CFD, $O(\mathrm{Re}^3)$ (SC) & $10^{21}$--$10^{39}$ logical qubits $\times$ T gates for a sphere; bounded gain $\mathrm{Re}^{3D/8}$; one crossover reported at $2^{80}$ grid points (source-reported range; public records reach $7.9\times10^{40}$) & No practical advantage established; conditional polynomial proposals & class \#38: \mtP\\
+34 & E1 & Gaussian boson sampling, Jiuzhang (2020), 100 modes & USTC, 2020~\cite{zhong2020} & Marginal-based mock-up samplers~\cite{villalonga2021}; squashed-state model~\cite{martinez2023} (SC) & Mock-up closer than the experiment to the ideal marginals (\eld{E34} d); a classical explanation not ruled out; no sampling of the full ideal distribution & Validation statistic challenged & ---\\
+35 & E1 & Gaussian boson sampling, Borealis & Xanadu, 2022~\cite{madsen2022} & Tensor-network GBS algorithm~\cite{oh2024} (SC) & Benchmark statistics of the experiment outperformed (\eld{E35} d) & Validation benchmark matched & ---\\
+36 & E1 & Gaussian boson sampling, Jiuzhang 3.0 & USTC, 2023~\cite{deng2023} & Tensor-network GBS algorithm~\cite{oh2024} (SC) & Benchmark statistics of the experiment outperformed (\eld{E36} d); newest generation open~\cite{hangleiter2026} & Validation benchmark matched & ---\\
+\end{longtable}
+}

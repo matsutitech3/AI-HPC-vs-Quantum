@@ -1,0 +1,24 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1, horizontal sep=1.9cm}, height=6.0cm, ticklabel style={font=\footnotesize}, label style={font=\footnotesize}]
+\nextgroupplot[width=0.56\textwidth, xmode=log, ymode=log, xmin=4e4, xmax=1.5e7, ymin=0.3, ymax=5000, xlabel={Physical qubits}, ylabel={Expected runtime (hours)}, grid=major, grid style={black!10}, clip=false]
+\addplot[only marks, mark=square*, mark size=2.6pt, color=black!55] table[x=x,y=y] {figdata/femoco54_prior.dat};
+\addplot[only marks, mark=*, mark size=2.8pt, color=qcF] table[x=x,y=y] {figdata/femoco54_dense.dat};
+\addplot[qcF!60, dashed] table[x=x,y=y] {figdata/femoco54_dense.dat};
+\node[font=\scriptsize, anchor=west] at (axis cs:6.3e6,1440) {DF};
+\node[font=\scriptsize, anchor=west] at (axis cs:4.2e6,72) {THC};
+\node[font=\scriptsize, anchor=west] at (axis cs:3.4e6,3) {DFTHC+SA};
+\node[font=\scriptsize, anchor=south west, qcF] at (axis cs:9.5e4,720) {compact};
+\node[font=\scriptsize, anchor=north east, qcF] at (axis cs:1.9e5,20) {balanced};
+\node[font=\scriptsize, anchor=north east, qcF] at (axis cs:1.0e6,1.0) {efficient};
+\node[font=\scriptsize, anchor=north west, qcF] at (axis cs:2.1e6,0.75) {fast};
+\input{figdata/femoco_annot.tex}
+\nextgroupplot[width=0.40\textwidth, ybar, ymode=log, log origin=infty, ymin=0.5, ymax=2e4, xtick={1,...,7}, xticklabels={DF,THC,DFTHC,compact,balanced,efficient,fast}, xmin=0.4, xmax=7.6, xticklabel style={rotate=45, anchor=east, font=\scriptsize}, ylabel={Space-time volume ($10^6$ qubit-h)}, bar width=8pt, bar shift=0pt, nodes near coords, point meta=rawy, every node near coord/.append style={font=\tiny}]
+\addplot[fill=black!20, draw=black!75, line width=0.3pt, postaction={pattern=north east lines, pattern color=black!80}] table[x=x,y=y] {figdata/femoco54vol_prior.dat};
+\addplot[fill=qcF, draw=none] table[x=x,y=y] {figdata/femoco54vol_dense.dat};
+\end{groupplot}
+\end{tikzpicture}
+\caption[FeMoco, 54 orbitals: quantum cost frontier]{Phase estimation on the 54-orbital FeMoco model at 1\,mHa, all values from one source~\cite{low2026dense}. Squares, and hatched bars in the right panel: prior estimates as tabulated there, by double factorization (DF), tensor hypercontraction (THC) and THC with spectrum amplification (DFTHC+SA). Circles and plain bars: the 2026 dense planar surface code at a 1\,$\mu$s cycle and 10\,$\mu$s reaction time, in four rows of its Table~XXVII that the source names compact (within a month), balanced (within a day), efficient (minimum volume) and fast. The source's summary table gives the first two as upper limits (under a month, under a day); the tabulated expected runtimes are plotted here. Against the best prior point the source reports \femoSpace$\times$ fewer physical qubits and \femoVol$\times$ smaller minimum space-time volume. Larger ratios against the oldest point describe progress across algorithms, not the frontier at a fixed qubit budget.}
+\label{fig:femoco}
+\end{figure}

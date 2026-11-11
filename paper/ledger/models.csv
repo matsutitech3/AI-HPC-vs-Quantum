@@ -1,0 +1,19 @@
+model_id,parameter,value,unit,note
+rep,delta_total,0.01,,total failure budget of the repetition scenario
+rep,split,equal,,delta_hit = delta_low = delta_total/2 in the split-budget column; delta_hit = delta_total when downward outliers have zero budget
+rep,p_scenario,0.5,,hypothetical hit probability per accepted execution
+rep,record,R-FEMO76-DC-minvol,,one accepted execution costs the expected accepted runtime of this row
+breakeven,t_C,1e-08,s,illustrative classical oracle evaluation
+breakeven,P_ref,1000000.0,cores,reference point for annotations
+breakeven,t_react,1e-05,s,reaction time (low2026dense)
+readout,b,32,bits,
+readout,n,1000,qubits,
+readout,t_shot_slow,0.001,s,
+readout,t_shot_fast,1e-06,s,
+readout,B_mem,1000000000000.0,bits/s,
+readout,N_example,1000000000.0,values,
+aa,T,1000.0,queries,illustration of the simulation bound
+aa,eps,0.1,,
+aa,delta,0.1,,
+dmrg_plan,anchor,C-P450-X3000,,M^3 planning curve anchored at this value
+cores,fugaku,7630000.0,cores,ideal conversion only

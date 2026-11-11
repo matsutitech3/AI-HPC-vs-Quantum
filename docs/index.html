@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI+HPC versus Quantum Computing on the Same Scientific Problems</title>
+<meta name="description" content="A living survey that compares AI+HPC and quantum computing on the same scientific problems, with a versioned evidence ledger. Updated about once a month.">
+<style>
+  :root {
+    --bg: #fbfaf7; --panel: #ffffff; --ink: #1b2430; --muted: #5a6675; --rule: #d9dde3;
+    --accent: #0b3d91; --accent-ink: #ffffff; --soft: #eef2f8; --mark: #a84400;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #12161c; --panel: #1a2029; --ink: #e8ecf1; --muted: #a3afbd; --rule: #313a47;
+            --accent: #8fb4f2; --accent-ink: #0d1420; --soft: #1f2733; --mark: #f0a56a; }
+    .figure img { background: #ffffff; }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 18px; line-height: 1.62; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible, .btn:focus-visible { outline: 3px solid var(--mark); outline-offset: 3px; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 22px; }
+  header { border-bottom: 1px solid var(--rule); padding: 56px 0 34px; }
+  .kicker { font-family: var(--sans); font-size: 13px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+  h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.14; margin: 0 0 12px; font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
+  .subtitle { font-size: 21px; color: var(--muted); margin: 0 0 22px; font-style: italic; text-wrap: balance; }
+  .byline { font-family: var(--sans); font-size: 15.5px; margin: 0 0 26px; }
+  .release { display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: baseline; font-family: var(--sans); font-size: 15px;
+             border-left: 4px solid var(--accent); background: var(--soft); padding: 12px 16px; margin: 0 0 24px; }
+  .release b { font-size: 17px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn { font-family: var(--sans); font-size: 15.5px; font-weight: 600; text-decoration: none; padding: 10px 18px; border-radius: 4px; border: 1.5px solid var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); }
+  main section { padding: 38px 0 6px; }
+  h2 { font-family: var(--sans); font-size: 14px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; font-weight: 700; }
+  p { margin: 0 0 16px; }
+  .abstract { font-size: 18.5px; }
+  .findings { list-style: none; padding: 0; margin: 0; counter-reset: f; }
+  .findings li { counter-increment: f; position: relative; padding: 0 0 14px 44px; }
+  .findings li::before { content: counter(f); position: absolute; left: 0; top: 2px; width: 28px; height: 28px; border: 1.5px solid var(--accent); border-radius: 50%;
+                         font-family: var(--sans); font-size: 14px; font-weight: 700; color: var(--accent); display: grid; place-items: center; }
+  .figure { margin: 8px 0 8px; }
+  .figure img { width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 4px; display: block; }
+  .figure figcaption { font-family: var(--sans); font-size: 14.5px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 6px 0 18px; }
+  .stat { background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; padding: 14px 16px; }
+  .stat b { display: block; font-family: var(--sans); font-size: 26px; font-variant-numeric: tabular-nums; }
+  .stat span { font-family: var(--sans); font-size: 13.5px; color: var(--muted); }
+  .tablewrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--rule); }
+  th { font-size: 13px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+  td:first-child, td:nth-child(2) { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  code { font-family: var(--mono); font-size: .88em; background: var(--soft); padding: 1px 5px; border-radius: 3px; }
+  .note { font-family: var(--sans); font-size: 15px; color: var(--muted); }
+  footer { border-top: 1px solid var(--rule); margin-top: 40px; padding: 24px 0 60px; font-family: var(--sans); font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="kicker">Living survey &middot; updated about once a month</p>
+    <h1>AI+HPC versus Quantum Computing on the Same Scientific Problems</h1>
+    <p class="subtitle">Matched Tasks, Complete Costs and Conditional Opportunities</p>
+    <p class="byline">Satoshi Matsuoka &middot; RIKEN Center for Computational Science (R-CCS)</p>
+    <div class="release" role="status">
+      <span><b>Version 8.2</b></span>
+      <span>Released 11 November 2026</span>
+      <span>50 pages</span>
+      <span>Preprint, not peer reviewed</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="paper/ai_vs_qc_survey_latest.pdf">Read the paper (PDF)</a>
+      <a class="btn" href="https://github.com/matsutitech3/AI-HPC-vs-Quantum">Source and evidence ledger</a>
+      <a class="btn" href="https://github.com/matsutitech3/AI-HPC-vs-Quantum/issues">Report a correction</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section aria-labelledby="h-abs">
+    <h2 id="h-abs">Abstract</h2>
+    <p class="abstract">Do advances in artificial intelligence (AI) and high-performance computing remove the need for quantum computers in science? Answering requires comparisons that fix the scientific output, the accuracy and the complete cost. We review quantum experiments, fault-tolerant resource estimates and classical methods across many-body physics, chemistry, materials and engineering simulation. Of sixteen device claims tracked, four were answered at their validation benchmark and two challenged on it, one at its reported observables and one in part, all by structured numerical or variational methods; two are contested and six remain unmatched in the regimes tested. Neural methods also act as direct wavefunction solvers and support useful workflows through reusable predictions and reformulation. Source checks show why broad rankings are unreliable: classical baselines may use limited hardware or another accuracy criterion, while quantum estimates depend on state preparation, repeated executions and future error-corrected hardware. Recent compilations cut some chemistry estimates to hours on about a million physical qubits, but matched end-to-end comparisons remain incomplete. For engineering linear systems and fluid dynamics, no practical quantum advantage over a strong classical workflow is established: published estimates are dominated by conditioning, data access and readout, and the remaining proposals are conditional and polynomial. Quantum-native and high-dimensional problems with scalar outputs are the natural candidates. We provide a versioned evidence ledger, explicit resource models and the tests that would change each assessment. The result is a framework for judging contributions to scientific answers, not a ranking of computing paradigms.</p>
+  </section>
+
+  <section aria-labelledby="h-fig">
+    <h2 id="h-fig">Device claims and classical responses</h2>
+    <figure class="figure">
+      <img src="img/timeline.png" width="882" height="563"
+           alt="Horizontal bar chart of sixteen quantum device claims. Four were matched at their validation benchmark after 0.5 to 24.4 months; two boson-sampling claims were challenged on a validation statistic after 2.8 and 9.7 months; one was reproduced at its observables after 0.4 months; one was partly reproduced; two are contested; six remain open after 2.3 to 19.5 months.">
+      <figcaption>Figure 2 of the paper. Time from first public claim to first classical response for the sixteen device claims that meet the eligibility rule. The kind of response is printed at the end of each bar and repeated in the fill. Open bars record the absence of a qualifying response as of 11 November 2026, not evidence of impossibility.</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="h-find">
+    <h2 id="h-find">What the current version finds</h2>
+    <ol class="findings">
+      <li>Comparisons disagree mainly because they do not fix the same thing. The paper compares one instance, one observable and one accuracy, with the complete cost on each side.</li>
+      <li>Of sixteen device claims, eight have received a classical response at or on their own validation test, two are contested and six are open. None of the responses needed a neural network.</li>
+      <li>Fault-tolerant estimates for chemistry have fallen to hours on about a million physical qubits for one energy of a named model. State preparation, repetitions and a matched classical result are still missing.</li>
+      <li>For engineering linear systems and fluid dynamics, no practical quantum advantage over a strong classical workflow is established. The author's assessment is that quantum linear solvers are unlikely to accelerate engineering linear algebra as it is practised; the paper states the test that would change this.</li>
+      <li>The plausible quantum contributions are conditional: quantum-native inputs, scalar outputs, and regimes where classical methods lack an established accuracy and cost. Each is listed with the evidence it still needs.</li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="h-led">
+    <h2 id="h-led">Evidence ledger</h2>
+    <p>Every number that enters a figure or a ratio is stored with its source version and locator, and is recomputed by a validator before each release. Values known only from an abstract or at second hand are marked and kept out of figures.</p>
+    <div class="stats">
+      <div class="stat"><b>36</b><span>evidence entries</span></div>
+      <div class="stat"><b>76</b><span>resource records</span></div>
+      <div class="stat"><b>38</b><span>forward problem classes</span></div>
+      <div class="stat"><b>1,312</b><span>validation checks</span></div>
+      <div class="stat"><b>14</b><span>negative tests</span></div>
+    </div>
+    <p class="note">The tables and scripts are in <code>paper/ledger/</code> of the repository; three commands rebuild the tables, the figure data and the tests.</p>
+  </section>
+
+  <section aria-labelledby="h-hist">
+    <h2 id="h-hist">Release history</h2>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th scope="col">Version</th><th scope="col">Date</th><th scope="col">What changed</th></tr></thead>
+      <tbody>
+        <tr><td><a href="paper/ai_vs_qc_survey_v8.2.pdf">8.2</a></td><td>11 Nov 2026</td><td>No caption names a colour; every series is identified by shape, line style, hatching or a label.</td></tr>
+        <tr><td>8.1</td><td>11 Nov 2026</td><td>Figures made readable without colour.</td></tr>
+        <tr><td>8</td><td>11 Nov 2026</td><td>Engineering conclusion restated as an empirical finding plus a labelled assessment. Boson sampling split into four experiments. OTOC timing corrected from the primary paper. Navier&ndash;Stokes, drag and gauge-theory counts read in the primary sources.</td></tr>
+        <tr><td>7.1</td><td>11 Nov 2026</td><td>Consistency pass; primary-source reads for the linear-solver studies.</td></tr>
+        <tr><td>7</td><td>11 Nov 2026</td><td>Full rewrite in eight sections; linear systems and fluid dynamics added as a negative case.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note" style="margin-top:14px">Earlier versions were internal drafts. Full change logs are in the repository.</p>
+  </section>
+
+  <section aria-labelledby="h-upd">
+    <h2 id="h-upd">How this document is kept current</h2>
+    <p>About once a month the sources behind every entry are searched again: new versions of cited papers, new classical responses to open device claims, new device claims, and new resource estimates. A value is entered only after it has been read in the primary source. Each update is a numbered release with a change log that lists corrections first.</p>
+    <p>Corrections are welcome. An issue that names the source, its version and the table, equation or page with the right value can be checked and merged quickly.</p>
+  </section>
+
+  <section aria-labelledby="h-cite">
+    <h2 id="h-cite">How to cite</h2>
+    <p>S. Matsuoka, &ldquo;AI+HPC versus Quantum Computing on the Same Scientific Problems: Matched Tasks, Complete Costs and Conditional Opportunities,&rdquo; version 8.2, 11 November 2026. Please cite the version you used.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    The paper states how AI models were used in its preparation; the author is accountable for its content.
+  </div>
+</footer>
+</body>
+</html>

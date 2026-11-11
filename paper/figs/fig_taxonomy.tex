@@ -1,0 +1,18 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  grp/.style={draw=black!45, rounded corners=3pt, align=left, inner sep=5pt, font=\footnotesize, text width=8.6cm, minimum height=1.5cm},
+  tag/.style={rounded corners=2pt, align=left, font=\scriptsize, text width=4.3cm, inner sep=5pt, minimum height=1.5cm},
+  node distance=0.2cm]
+\node[grp] (h) {\textbf{1. Hardware.} Logical gates are slow, logical qubits are few, and error correction consumes most physical qubits. Applies to every fault-tolerant estimate. \textcolor{black!55}{(H)}};
+\node[grp, below=of h] (io) {\textbf{2. Information access.} Classical data must be loaded, a prepared state must overlap the answer, and results must be read out by repeated measurement. \textcolor{black!55}{(IO)}};
+\node[grp, below=of io] (s) {\textbf{3. Baseline validity.} The instance had structure a classical method could use (geometry, limited operator growth, sign-free sectors, near-single-configuration states), a variational state compressed it, or the benchmark had no application output. \textcolor{black!55}{(S, V, B)}};
+\node[grp, below=of s] (a) {\textbf{4. Scientific adequacy.} A model trained once serves many queries, or a validated reformulation answers the scientific question without the original computation. \textcolor{black!55}{(A, R)}};
+\node[tag, right=0.25cm of h, fill=qcFl!60, draw=qcQ, line width=0.9pt] {\textbf{Erodes with hardware progress:} faster logical gates, more qubits, lower error.};
+\node[tag, right=0.25cm of io, fill=qcNl!70, draw=black!70, dashed, line width=0.7pt] {\textbf{Set by the algorithm and the task:} scalar outputs and quantum-native inputs avoid it; full fields and bulk data do not.};
+\node[tag, right=0.25cm of s, fill=qcFl!60, draw=qcQ, line width=0.9pt] {\textbf{Depends on the instance:} evidence weakens with size, depth, frustration and doping, and must be re-tested for each claim.};
+\node[tag, right=0.25cm of a, fill=qcNl!70, draw=black!70, dashed, line width=0.7pt] {\textbf{Depends on workload and validation:} persists while the reused model or the replacement question stays inside its validated domain.};
+\end{tikzpicture}
+\caption[Four explanations for classical capability]{Four groups of explanation for why a classical or AI method answers a problem proposed for a quantum computer, and how each responds to quantum progress. Right-hand boxes with a solid border: progress in hardware or a harder instance can remove the explanation. Right-hand boxes with a dashed border: the explanation persists under stated workload and adequacy conditions. Letters are the codes used in the appendix tables. An explanation that has not been exploited for an instance has not been shown to be absent, and several usually apply to one case.}
+\label{fig:taxonomy}
+\end{figure}

@@ -1,0 +1,18 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  ybar, ymode=log, log origin=infty, width=0.76\textwidth, height=6.0cm,
+  ymin=0.1, ymax=5e10, xtick={1,2,3,4}, xticklabels={{$\mu$s, $p{=}10^{-3}$}, {$\mu$s, $p{=}10^{-4}$}, {ns, $p{=}10^{-3}$}, {ns, $p{=}10^{-4}$}}, xmin=0.4, xmax=4.6,
+  ylabel={\footnotesize Runtime per execution (s)}, ticklabel style={font=\footnotesize}, bar width=14pt,
+  legend style={font=\scriptsize, at={(0.5,1.03)}, anchor=south, draw=black!25, legend columns=1},
+  ymajorgrids, grid style={black!10}]
+\addplot[fill=qcF, draw=none] table[x=x,y=y] {figdata/platform_TFIM.dat};
+\addlegendentry{2D TFIM dynamics (230 LQ, $2.4\times10^6$ T)}
+\addplot[fill=black!20, draw=black!75, line width=0.3pt, postaction={pattern=north east lines, pattern color=black!80}] table[x=x,y=y] {figdata/platform_RU.dat};
+\addlegendentry{Ru catalyst (2740 LQ, $5.4\times10^{11}$ T)}
+\end{axis}
+\end{tikzpicture}
+\caption[Source schedule sensitivity]{Source schedule sensitivity: one fixed algorithm per target under four qubit scenarios from Beverland et al.~\cite{beverland2022}. Each scenario has its own factory allocation and code distance as set by the source, so this compares source schedules and does not isolate gate speed. For the catalyst the runtime spans a factor of about \ruSpread{} across the four scenarios and about \ruSpreadFixed{} between the two gate platforms at a fixed physical error rate.}
+\label{fig:platform}
+\end{figure}

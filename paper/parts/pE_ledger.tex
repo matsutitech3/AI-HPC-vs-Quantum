@@ -1,0 +1,67 @@
+
+% =====================================================================
+\section{Evidence ledger, search and update record}
+\label{app:ledger}
+The ledger, provided as ancillary files, consists of eight linked tables with stable identifiers.
+\begin{itemize}
+\item \texttt{entries.csv} (\nEntries{} rows): comparison level, model, observable, kind of match, timeline eligibility, dates with precision flags, elapsed days; the fields of the comparison record (instance and version, boundaries, tolerance, meaning of the failure probability, workload, access model); and three status fields, one of which records the basis on which a classical result is validated (a measured run, a benchmark evaluation, an experimental confirmation, an empirical extrapolation, a scaling law or a theorem).
+\item \texttt{pairs.csv} (\nPairs{} rows): the same comparison record for the headline comparisons that are problem classes and not entries.
+\item \texttt{resources.csv} (\nResources{} rows): one row per Hamiltonian, algorithm, layout and schedule, with source version, locator and locator level, the artifact read and the day it was retrieved, gate type, count and its scope, width and width convention, physical qubits, expected and one-shot runtime with the logical failure probability, space--time volume, coverage, unvalidated assumptions and our own extraction gaps.
+\item \texttt{values.csv} (\nValues{} rows): classical times and other scalar facts with unit, kind, machine or criterion, version, locator and artifact.
+\item \texttt{models.csv}: parameters of the formula figures and of the repetition scenario.
+\item \texttt{forward\_classes.csv} (\nClasses{} rows) and \texttt{figure\_points.csv} (\nPoints{} rows; for each plotted point, the record, field and named transformation that each coordinate is computed from).
+\item \texttt{update\_log.csv} (\nLog{} rows): each source check, with the version inspected, any access issue, and a marker on checks that a later one superseded.
+\end{itemize}
+Missing values carry one of four codes: \texttt{not\_reported} (the source does not give it), \texttt{not\_extracted} (we have not read it out), \texttt{not\_applicable}, \texttt{not\_estimated}.
+
+\paragraph{Build and validation.} \texttt{build\_ledger.py} is the authoritative source and writes the tables. \texttt{make\_figdata.py} then runs \nChecks{} checks and writes the plot data only if all pass.
+\begin{itemize}
+\item Each of the \nCoords{} plotted coordinates is recomputed from its cited record and transformation and compared with the stored coordinate.
+\item A point is refused if its record is known only from an abstract or at second hand.
+\item A point is refused unless its source version is an arXiv identifier with a version number or a journal reference. Strings such as ``latest'' or ``as read for an earlier draft'' are rejected.
+\item Units are checked: each transformation declares the unit it accepts and returns, and the result must be the unit of the axis. T-state and Toffoli counts cannot share a series.
+\item A point's bound kind must equal that of its source row, and a one-sided value may be written only to a series drawn with a limit marker. No plotted value in this version is one-sided.
+\item Every row taken from the dense-code table must satisfy that table's two internal relations: volume equals qubits times expected runtime, and expected runtime equals one-shot runtime divided by one minus the failure probability.
+\item Links, vocabularies and the coverage-aggregation rule are checked.
+\end{itemize}
+\texttt{test\_negative.py} corrupts a copy of the ledger in fourteen ways, one for each kind of check, and passes only if the validator rejects each. The validation establishes that figures agree with tables and that tables are internally consistent. It does not establish that a value was read correctly from its source, which rests on the locators, and it does not make the identity of a version certain: we record the version stamp of the artifact we read, because a request for an older version of a page can silently return the current one.
+
+\paragraph{What is and is not generated.} All data points, connectors, range bars and ratios quoted in the text are generated from the tables. Figs.~\ref{fig:quadratic} and~\ref{fig:readout} are formula figures whose parameters are in \texttt{models.csv}. Fig.~\ref{fig:taxonomy} is a diagram. Axis labels, legend text, the names printed beside some points, the vendor target lines of Fig.~\ref{fig:resource} and guide lines are typed in the manuscript. The summary tables in the text and Table~\ref{tab:master} are typed and were checked against the ledger by hand.
+
+\paragraph{Completeness of the comparison records.} Table~\ref{tab:complete} counts, for the \nEoneEtwo{} device-comparison and resource-estimate entries, how many have each field of the comparison record filled. Most fields are still empty for most entries, so the comparison record is a schema we apply and report against, not yet a complete description of each pair. Table~\ref{tab:pairs} gives the records for the headline comparisons, with what is missing from each.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Completeness of the comparison record for the \nEoneEtwo{} entries of types E1 and E2, generated from \texttt{entries.csv}.}\label{tab:complete}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Field & Filled & Not extracted\\\midrule
+\completenessrows
+\bottomrule
+\end{tabular}
+\end{table}
+
+{\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}L{2.1cm} L{2.5cm} L{3.2cm} L{2.8cm} L{2.1cm} L{2.9cm}@{}}
+\caption{Comparison records for the headline pairs, generated from \texttt{pairs.csv}.}\label{tab:pairs}\\
+\toprule
+Pair & Instance & Tolerance and its meaning & Failure probability & Workload & What is missing\\\midrule\endfirsthead
+\toprule
+Pair & Instance & Tolerance and its meaning & Failure probability & Workload & What is missing\\\midrule\endhead
+\bottomrule\endfoot
+\input{figdata/pairs_table.tex}
+\end{longtable}
+}
+
+\subsection*{Search, inclusion and update record}
+\label{app:search}
+\textbf{Sources.} arXiv (quant-ph, cond-mat, physics.chem-ph, physics.flu-dyn, hep-lat, cs.LG), Nature and Science family journals, APS and ACS journals, vendor technical releases and the Quantum Advantage Tracker, 2017 to 11 November 2026.
+
+\textbf{Inclusion.} A quantum hardware result or fault-tolerant resource estimate and a classical or AI result addressing the same or a closely related task, or a theoretical result bearing directly on such a pair. Context entries were added where an AI result is commonly cited as making quantum computing unnecessary. Timeline eligibility is defined in Fig.~\ref{fig:timeline}. Not entered in the timeline: later random-circuit and boson-sampling generations individually, the protein-fragment study (it claims model accuracy, not intractability), and the hybrid chemistry workflows (no advantage claimed).
+
+\textbf{Exclusion.} Quantum results without any classical comparison; classical results without a quantum counterpart or stated quantum motivation; news reports without a primary source. For the standing claims we found no full classical reproduction; that is a search result as of the cutoff, not proof that none exists.
+
+\textbf{Limitations.} The original searches were not logged query by query, so the selection cannot be reproduced exactly. Source checks made in November 2026 are logged in \texttt{update\_log.csv} (Table~\ref{tab:update}).
+
+\input{figs/tab_update.tex}

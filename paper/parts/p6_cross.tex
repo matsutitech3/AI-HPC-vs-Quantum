@@ -1,0 +1,66 @@
+% =====================================================================
+\section{What determines a crossover}
+\label{sec:cross}
+
+A crossover is the problem size, accuracy or workload at which one method becomes cheaper than another for the same output. This section gives the minimum set of models needed to locate one. Derivations of secondary quantities, the comparison with announced hardware roadmaps and the remaining figures are in Appendix~\ref{app:models}.
+
+\subsection{Complete cost on both sides}
+\label{sec:cost}
+For a workload of $K$ related problem instances, the classical and quantum costs are
+\begin{align}
+T_C(K) &= T_{\rm setup}+T_{\rm shared}+\sum_{j=1}^{K}T_{{\rm solve},j}+T_{\rm validation}+T_{\rm post},\label{eq:tck}\\
+T_Q(K) &= T_{\rm pre}+T_{\rm compile}+T_{\rm calib}+\sum_{j=1}^{K}\sum_{r=1}^{R_j}\left(t_{{\rm prep},jr}+t_{{\rm circ},jr}+t_{{\rm read},jr}\right)+T_{\rm post}.\label{eq:tqk}
+\end{align}
+$T_{\rm shared}$ is work reused across instances, such as generating labels and training a model. For a reused learned model the solve term is a cheap inference and the shared term dominates. For a direct solver, such as a neural quantum state optimized afresh for each Hamiltonian or a DMRG run, the shared term is small and each solve is expensive. The quantum sum runs over $R_j$ repetitions per instance, each with preparation, circuit and readout. Estimating one bounded observable to accuracy $\epsilon$ by independent shots needs of order $\epsilon^{-2}\log(1/\delta)$ repetitions for failure probability $\delta$; other estimators change this, so the estimator should be named. Costs are best reported as a vector of wall time, allocated machine hours, energy and time to a decision. A conversion of a core-hour count into wall time on a large machine at perfect scaling is an allocation equivalent and is labelled as such.
+
+Agreement with an exact model Hamiltonian is also not agreement with experiment. For chemistry and materials the error of a decision has several sources,
+\begin{equation}
+\epsilon_{\rm decision}\ \lesssim\ \epsilon_{\rm model}+\epsilon_{\rm basis/embedding}+\epsilon_{\rm solver}+\epsilon_{\rm sampling}+\epsilon_{\rm generalization},
+\label{eq:errbudget}
+\end{equation}
+where the terms are bookkeeping categories, not a rigorous bound. A better solver helps only when the solver term dominates.
+
+\subsection{Runtime of a fault-tolerant execution}
+A fault-tolerant execution cannot be faster than its slowest required resource. When magic-state production is the bottleneck,
+\begin{equation}
+T_{\rm run}\ \approx\ \frac{N_{\rm nc}}{R_{\rm nc}},\qquad R_{\rm nc}=\frac{n_f}{t_f},
+\label{eq:tq}
+\end{equation}
+for $N_{\rm nc}$ non-Clifford gates, $n_f$ factories and a time $t_f$ per distilled state; reaction-limited stages, code depth and routing give further lower bounds (Appendix~\ref{app:models}). As a check, the estimate of Beverland et al.\ for two-dimensional Ising dynamics uses 199 factories that each produce a T state every 46.8\,$\mu$s, a rate of $4.25\times10^6$ per second, so its $2.4\times10^6$ T gates take 0.56\,s, the published runtime per execution~\cite{beverland2022,beverland_qualtran}. Those factories occupy 94.5\% of the 682{,}020 physical qubits. A rate obtained this way describes one schedule and is not portable to another algorithm, code or platform.
+
+\subsection{What one phase-estimation run delivers}
+\label{sec:qpe}
+Quantum phase estimation (QPE) samples energies according to the spectral content of the state it is given. A useful answer needs both enough weight near the wanted energy and enough estimation accuracy to stay within the final tolerance. We therefore divide the tolerance between the two and bound the probability of the resulting good event from below.
+
+Let the prepared state have weight $w_k$ on the eigenstate with energy $E_k$, let $\widehat E$ be the energy returned by one execution, and let $F$ denote that no fault invalidated it. Choose $a,b\ge0$ with $a+b\le\epsilon$. Then
+\begin{equation}
+p_{\rm hit}:=\Pr\bigl(|\widehat E-E_0|\le\epsilon\bigr)\ \ge\ p_{\rm good}:=\sum_{k:\,|E_k-E_0|\le a}w_k\,\Pr\bigl(|\widehat E-E_k|\le b,\ F\mid k\bigr)\ \ge\ \underline w_a\,s_{\min},
+\label{eq:phit}
+\end{equation}
+where $\underline w_a$ is a lower bound on the total weight within $a$ of $E_0$ and $s_{\min}$ a lower bound on the conditional probability in the sum. The first inequality is the triangle inequality; no independence between spectral selection, estimation error and faults is assumed. The weight within a window can exceed the squared overlap with a single eigenstate. An overlap value bounds the ideal spectral-selection probability, not $p_{\rm hit}$ itself, and an upper bound of any kind cannot size a guarantee: if the true probability is 0.1 and seven executions are chosen for an assumed 0.5, the chance of a hit is $1-0.9^7=0.52$, not 0.99.
+
+A guarantee over repeated executions must also divide its failure budget. Let $p_{\min}$ be a lower bound on $p_{\rm hit}$ for each of $R$ independent executions and $q_{\rm low}$ the probability that one execution returns an energy below $E_0-\epsilon$. Taking the lowest of the $R$ readings fails with probability at most $(1-p_{\min})^R+R\,q_{\rm low}$. With a budget $\delta_{\rm hit}+\delta_{\rm low}+\delta_{\rm other}\le\delta_{\rm total}$ the requirements are
+\begin{equation}
+R\ \ge\ \left\lceil\frac{\log\delta_{\rm hit}}{\log(1-p_{\min})}\right\rceil,\qquad R\,q_{\rm low}\ \le\ \delta_{\rm low}.
+\label{eq:qperep}
+\end{equation}
+None of this certifies that the lowest energy found is the global ground state if the prepared state has no weight on it~\cite{berry2024}.
+
+\input{figs/fig_rep.tex}
+
+\emph{Two kinds of retry.} A resource estimate may already include repeats after a \emph{detected logical failure}. Those must not be counted again in the hit probability. We use one convention throughout: an attempt is one logically accepted execution, its duration is the source's expected accepted runtime, and $p$ is the hit probability conditional on acceptance. For the FeMoco minimum-volume schedule, one accepted execution costs \femoT{} expected hours (Section~\ref{sec:chem}). At a hypothetical $p=0.5$, \repAttempts{} accepted executions give a hit with probability \repHit{} if downward outliers are assigned no budget, for an expected \repHours{} hours. If a total budget of 0.01 is split equally between misses and downward outliers, \repAttemptsSplit{} executions are needed, an expected \repHoursSplit{} hours, with $q_{\rm low}\le{}$\repQlow{} (Fig.~\ref{fig:rep}). These durations are means for a fixed number of accepted executions. A deadline guarantee would also need the tail of the runtime distribution. A rule that stops at the first hit would have a mean of $\femoT/p$ hours, but ordinary QPE provides no such rule: detecting a damaged circuit is not the same as recognizing the ground state. The numbers are sensitivity scenarios, not measured overlaps, certified identifications or crossovers at matched confidence.
+
+\subsection{What a polynomial speedup is worth}
+\label{sec:breakeven}
+Suppose a classical evaluation of some function costs $t_C$ on each of $P$ effectively usable processors, a quantum evaluation of the same function costs $t_Q$ on each of $Q$ quantum processors, and the quantum algorithm needs the $d$-th root of the classical number of evaluations. For a search over $M$ items that can be partitioned across the quantum processors, the costs are $Mt_C/P$ and $(M/Q)^{1/d}t_Q$, and they are equal at a runtime
+\begin{equation}
+T^*=\left(\frac{P\,t_Q}{Q^{1/d}\,t_C}\right)^{\!d/(d-1)}\frac{t_C}{P},\qquad\text{so for } d=2:\quad T^*=\frac{P\,t_Q^2}{Q\,t_C}.
+\label{eq:tstar}
+\end{equation}
+Below $T^*$ the classical machine wins. With $t_C=10$\,ns, $P=10^6$ and one quantum processor, the quadratic case gives $T^*$ of about \beYms{} years at $t_Q=1$\,ms, \beDhundred{} days at 100\,$\mu$s and \beHten{} hours at 10\,$\mu$s (Fig.~\ref{fig:quadratic} in Appendix~\ref{app:models}). The quantum evaluation time is bounded below by the classical reaction time of the error-correction system, about 10\,$\mu$s in the designs assumed by current estimates~\cite{low2026dense}, times the number of sequential reaction-dependent stages in the evaluation. The model has premises that must be checked for each use: $t_C$ and $t_Q$ must be costs of the same function; $P$ is effective parallelism, not installed core count; and partitioning holds for unstructured search but not for every algorithm with a polynomial speedup. Within those premises it reproduces the conclusion that quadratic speedups do not pay off on early fault-tolerant hardware~\cite{babbush2021,hoefler2023}. The calculation illustrates how sensitive a low-degree polynomial speedup is to a slow logical clock. It is not a forecast for the finite-element and fluid algorithms of Section~\ref{sec:linear}, whose partitioning, effective classical parallelism and oracle costs differ.
+
+\subsection{Input and output}
+\label{sec:output}
+When the scientific product is large, both sides must deliver it, and the quantities to compare are totals, $T^{\rm solve}+T^{\rm out}$ on each side. A slow output stage alone does not decide the comparison, because a much faster solve can outweigh it.
+
+Quantum linear and differential-equation solvers encode their solution in the amplitudes of a state. A selected scalar, such as a drag force, can be estimated from that state at a cost that grows as the inverse of the accuracy. A full field of $N$ values is different: reconstructing it to a stated error has a cost that grows with $N$~\cite{aaronson2015}, which removes a logarithmic dependence on $N$ unless the solve is cheaper by more than the readout costs. We make no general claim beyond that; the precise cost depends on the reconstruction criterion. An information-rate scenario in Appendix~\ref{app:models} illustrates the scale, and it does not apply when the field has a short description or when only selected observables are wanted. The input side is symmetric: loading unstructured classical data into a quantum state costs time proportional to the data, and algorithms whose speedup assumes fast loading have in several cases been matched by classical algorithms given comparable access~\cite{tang2021,tang2023}.

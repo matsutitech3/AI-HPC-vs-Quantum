@@ -1,0 +1,23 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  xmode=log, ymode=log, width=0.82\textwidth, height=8.2cm,
+  xmin=60, xmax=1e5, ymin=1e6, ymax=1e13,
+  xlabel={\footnotesize Logical qubits, in each source's width convention}, ylabel={\footnotesize Non-Clifford count in source unit},
+  ticklabel style={font=\footnotesize}, grid=major, grid style={black!10}, clip=false,
+  legend style={font=\scriptsize, at={(0.5,-0.16)}, anchor=north, draw=black!25, fill=white, legend columns=2}, legend cell align=left]
+\draw[dashed, draw=qcQ, line width=0.8pt] (axis cs:60,1e8) -- (axis cs:200,1e8) -- (axis cs:200,1e6);
+\draw[dashed, draw=qcQ, line width=0.8pt] (axis cs:60,1e9) -- (axis cs:2000,1e9) -- (axis cs:2000,1e6);
+\node[font=\scriptsize, qcQ, anchor=west] at (axis cs:62,2.5e7) {200 LQ / $10^8$ ops};
+\node[font=\scriptsize, qcQ, anchor=south west] at (axis cs:62,1.15e9) {2000 LQ / $10^9$ ops (IBM targets, per circuit)};
+\addplot[only marks, mark=*, mark size=2.6pt, color=qcF] table[x=x,y=y] {figdata/resmap_T_point.dat};
+\addlegendentry{T count, one circuit}
+\addplot[only marks, mark=triangle*, mark size=3.2pt, color=black!70] table[x=x,y=y] {figdata/resmap_Toff_point.dat};
+\addlegendentry{Toffoli count, one circuit}
+\input{figdata/resmap_labels.tex}
+\end{axis}
+\end{tikzpicture}
+\caption[Single-circuit resource estimates and announced vendor targets]{Published single-circuit resource estimates in their original units; only records read at table or section level with a reported compiled width are shown. Dashed lines are announced IBM targets, drawn as reference lines and not as feasibility regions. By the bound logic of Appendix~\ref{app:vendor}, a point beyond a line is an obstruction for that compiled circuit under convention X; a point inside a line establishes nothing about a real architecture. The XAS point is the longest circuit at the minimum algorithm workspace of 100 logical qubits, excluding factories~\cite{fomichev2025}. Cumulative counts over many circuits, such as the \xasAlg{} Toffoli gates of the full XAS spectrum, are not comparable with a per-circuit budget and are not drawn. The two FeMoco points are different Hamiltonians~\cite{lee2021thc}. Records without a reported width (lattice models, dense-code compilations, most gauge formulations) are omitted. Sources: TFIM, Ru, RSA~\cite{beverland2022}; P450~\cite{goings2022}.}
+\label{fig:resource}
+\end{figure}

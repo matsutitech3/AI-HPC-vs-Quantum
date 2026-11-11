@@ -1,0 +1,33 @@
+\input{figdata/timeline_axis.tex}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  xbar, width=0.56\textwidth, height=11.3cm,
+  xmin=0, xmax=38, y dir=reverse, timelineaxis,
+  yticklabel style={font=\footnotesize},
+  xlabel={\footnotesize Months from first public claim (days / 30.44); open claims to 11 Nov 2026},
+  xticklabel style={font=\footnotesize},
+  bar width=7pt, bar shift=0pt,
+  xmajorgrids, grid style={black!12},
+  axis x line*=bottom, axis y line*=left, clip=false,
+  legend style={font=\scriptsize, at={(0.5,1.02)}, anchor=south, draw=black!25, fill=white, legend columns=3}, legend cell align=left]
+\addplot[fill=qcN, draw=black!75, line width=0.3pt, nodes near coords={\pgfmathprintnumber[fixed,precision=1]{\pgfplotspointmeta}\,mo, matched}, point meta=x, every node near coord/.append style={font=\scriptsize, anchor=west}] table[x=x,y=y] {figdata/timeline_validation.dat};
+\addlegendentry{validation benchmark matched}
+\addplot[fill=white, draw=black!75, line width=0.3pt, postaction={pattern=north east lines, pattern color=black!70}, nodes near coords={\pgfmathprintnumber[fixed,precision=1]{\pgfplotspointmeta}\,mo, challenged}, point meta=x, every node near coord/.append style={font=\scriptsize, anchor=west}] table[x=x,y=y] {figdata/timeline_challenged.dat};
+\addlegendentry{validation statistic challenged}
+\addplot[fill=black!85, draw=black!85, line width=0.3pt, nodes near coords={\pgfmathprintnumber[fixed,precision=1]{\pgfplotspointmeta}\,mo, reproduced}, point meta=x, every node near coord/.append style={font=\scriptsize, anchor=west}] table[x=x,y=y] {figdata/timeline_observables.dat};
+\addlegendentry{observables reproduced}
+\addplot[fill=qcNl, draw=black!75, line width=0.3pt, postaction={pattern=dots, pattern color=black!80}, nodes near coords={$\approx$\pgfmathprintnumber[fixed,precision=1]{\pgfplotspointmeta}\,mo, partly}, point meta=x, every node near coord/.append style={font=\scriptsize, anchor=west}] table[x=x,y=y] {figdata/timeline_partial.dat};
+\addlegendentry{observables partly reproduced}
+\addplot[fill=qcUl, draw=qcUd, line width=0.3pt, postaction={pattern=crosshatch, pattern color=qcU}, nodes near coords={\pgfmathprintnumber[fixed,precision=1]{\pgfplotspointmeta}\,mo, contested}, point meta=x, every node near coord/.append style={font=\scriptsize, anchor=west}] table[x=x,y=y] {figdata/timeline_contested.dat};
+\addlegendentry{contested}
+\addplot[fill=qcF, draw=qcQ, line width=0.3pt] table[x=x,y=y] {figdata/timeline_open.dat};
+\addlegendentry{open (right-censored)}
+\addplot[quiver={u=3.2,v=0}, -{Latex[length=2.2mm]}, qcF, line width=1.2pt, forget plot] table[x=x,y=y] {figdata/timeline_open.dat};
+\addplot[only marks, mark=none, forget plot, nodes near coords={\textbf{$\ge$\pgfmathprintnumber[fixed,precision=1]{\pgfplotspointmeta}\,mo, open}}, point meta=x, every node near coord/.append style={font=\scriptsize, anchor=west, qcF, xshift=22pt}] table[x=x,y=y] {figdata/timeline_open.dat};
+\end{axis}
+\end{tikzpicture}
+\caption[Time from quantum claim to classical response]{Time from first public claim to first classical response for the \nTimeline{} device claims that meet the eligibility rule: \emph{a claim that a quantum device performed a computation faster or at larger scale than the best stated classical method}. The kind of response (Section~\ref{sec:match}) is printed in words at the end of each bar and repeated in the fill: a plain mid-tone bar for a matched validation benchmark, diagonal hatching for a challenged validation statistic, a plain dark bar for reproduced observables, dots for a partial reproduction, cross-hatching for a contested response, and a bar ending in an arrow for an open claim; arrows mark claims still open on 11 November 2026, from which no rate is inferred. Each row is one instance and version. A short bar records a fast response to a specified test; an open bar records the absence of a qualifying response, not evidence of impossibility. For Jiuzhang~2.0 the bar is the 2021 challenge, and the 2023 match is described in the text. A response to the 70-qubit doped Clifford circuit does not stop the clock for its 64-qubit successor, and the ultracold-atom clock starts at the April 2026 version that first reported 64 sites. The operator-Loschmidt-echo row is plotted from 30 November 2025, a lower bound on its age. Later random-circuit generations and the newest boson-sampling generation are not entered. Dates and sources are in \texttt{entries.csv}.}
+\label{fig:timeline}
+\end{figure}

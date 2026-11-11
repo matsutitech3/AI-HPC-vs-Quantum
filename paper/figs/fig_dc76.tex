@@ -1,0 +1,17 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1, horizontal sep=1.9cm}, width=0.47\textwidth, height=6.0cm, ticklabel style={font=\footnotesize}, label style={font=\footnotesize}, title style={font=\footnotesize}, xmode=log, ymode=log, xmin=5e4, xmax=8e6, grid=major, grid style={black!10}, xlabel={Physical qubits}, legend style={font=\scriptsize, draw=black!25, fill=white}, legend cell align=left]
+\nextgroupplot[ymin=1, ymax=1e5, ylabel={Expected accepted runtime (hours)}, title={FeMoco, 76 orbitals}, legend pos=north east]
+\addplot[qcF, mark=*, mark size=2.6pt, line width=0.6pt, densely dotted, mark options={solid}] table[x=x,y=y] {figdata/femoco76_dense.dat};
+\addlegendentry{dense code, 2026}
+\nextgroupplot[ymin=0.5, ymax=1e5, title={P450 Cpd I, model X (58 orbitals)}, legend pos=north east]
+\addplot[qcF, mark=*, mark size=2.6pt, line width=0.6pt, densely dotted, mark options={solid}] table[x=x,y=y] {figdata/p450dc_dense.dat};
+\addlegendentry{dense code, 2026}
+\addplot[only marks, mark=square*, mark size=2.6pt, black!55] table[x=x,y=y] {figdata/p450dc_prior.dat};
+\addlegendentry{THC, 2022}
+\end{groupplot}
+\end{tikzpicture}
+\caption[FeMoco and P450: selected rows of the 2026 quantum cost frontier]{Each curve trades physical qubits against modelled time for one energy calculation; state preparation and the reliability of a useful answer are separate. Selected rows of the space--time frontier for phase estimation on the 76-orbital FeMoco model and the 58-orbital P450 model~\cite{low2026dense}. The vertical axis is the source's expected runtime. Dotted lines are guides to the eye between selected rows. Circles: rows of the 2026 dense-code compilation. Squares: the 2022 estimates for the same P450 model~\cite{goings2022}. Row selection and assumptions are in Appendix~\ref{app:models}. Generated from \texttt{resources.csv}.}
+\label{fig:dc76}
+\end{figure}

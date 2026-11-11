@@ -1,0 +1,23 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  xbar, xmode=log, log origin=infty, width=0.66\textwidth, height=6.6cm,
+  xmin=10, xmax=2e7, y dir=reverse, ytick={1,...,8}, ymin=0.4, ymax=8.6,
+  yticklabels={{TFIM, ns gates, $p{=}10^{-4}$}, {TFIM, ns gates, $p{=}10^{-3}$}, {Ru catalyst, ns, $p{=}10^{-4}$}, {Ru catalyst, ns, $p{=}10^{-3}$}, {TFIM, $\mu$s gates, $p{=}10^{-4}$}, {Ru catalyst, $\mu$s, $p{=}10^{-4}$}, {P450 model X, THC, $p{=}10^{-3}$}, {FeMoco-54, THC, 4\,M phys.}},
+  yticklabel style={font=\footnotesize},
+  xlabel={\footnotesize Effective non-Clifford rate $N/T$ (states per second)},
+  xticklabel style={font=\footnotesize}, bar width=7pt, bar shift=0pt,
+  xmajorgrids, grid style={black!10},
+  nodes near coords={\pgfmathprintnumber[sci,precision=1]{\pgfplotspointmeta}}, point meta=x, every node near coord/.append style={font=\scriptsize, anchor=west},
+  axis x line*=bottom, axis y line*=left,
+  legend style={font=\scriptsize, at={(0.98,0.03)}, anchor=south east, draw=black!25, fill=white}]
+\addplot[fill=qcF, draw=none] table[x=x,y=y] {figdata/rates_T.dat};
+\addlegendentry{T states (Beverland et al.)}
+\addplot[fill=black!20, draw=black!75, line width=0.3pt, postaction={pattern=north east lines, pattern color=black!80}] table[x=x,y=y] {figdata/rates_CCZ.dat};
+\addlegendentry{Toffoli/CCZ}
+\end{axis}
+\end{tikzpicture}
+\caption[Rates implied by particular schedules]{Effective non-Clifford rates $N/T$ implied by particular published schedules, from \texttt{resources.csv}. T-state and Toffoli rates are different quantities and are drawn with different fills (plain bars for T states, hatched bars for Toffoli gates); the validator refuses a Toffoli record in the T series. Each value belongs to its source schedule (factory count, code, width, gate speed) and is not a portable platform performance. Sources: TFIM and Ru catalyst~\cite{beverland2022}; P450, $7.8\times10^9$ Toffoli in 73\,h~\cite{goings2022}; FeMoco 54-orbital layout, $6.7\times10^9$ Toffoli in 3 days at a stated 25\,kHz~\cite{lee2021thc}.}
+\label{fig:rates}
+\end{figure}

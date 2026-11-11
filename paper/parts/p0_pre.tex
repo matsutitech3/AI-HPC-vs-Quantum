@@ -1,0 +1,80 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2.1cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,longtable,array,tabularx,colortbl}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc,fit,patterns}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots,fillbetween}
+\usepackage{enumitem}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{xurl}
+\usepackage[section]{placeins}
+
+\definecolor{qcF}{HTML}{1F6FD0}
+\definecolor{qcFl}{HTML}{9CC3F0}
+\definecolor{qcN}{HTML}{8A8A8A}
+\definecolor{qcNl}{HTML}{CFCFCF}
+\definecolor{qcQ}{HTML}{0B3D91}
+\definecolor{qcU}{HTML}{D95F02}
+\definecolor{qcUd}{HTML}{A84400}
+\definecolor{qcUl}{HTML}{FBD9B5}
+\definecolor{qcG}{HTML}{2E7D32}
+
+\input{figdata/counts.tex}
+\input{figdata/counts_extra.tex}
+
+% present comparative status (used in the appendix tables)
+\newcommand{\psQ}{\textcolor{qcQ}{\textbf{standing claim}}}
+\newcommand{\psT}{\textcolor{qcQ}{\textbf{theoretical result}}}
+\newcommand{\psC}{\textcolor{qcUd}{\textbf{contested}}}
+\newcommand{\psN}{\textcolor{qcUd}{\textbf{not compared}}}
+\newcommand{\psV}{\textcolor{black!70}{\textbf{validated classical capability}}}
+\newcommand{\psM}{\textcolor{black!70}{\textbf{matched classical result (scoped)}}}
+\newcommand{\psCap}{\textcolor{black!50}{\textbf{capability benchmark}}}
+% resource coverage
+\newcommand{\mtC}{\textcolor{qcF}{\textsf{complete}}}
+\newcommand{\mtP}{\textcolor{qcF}{\textsf{partial}}}
+\newcommand{\mtS}{\textcolor{qcF}{\textsf{scenario}}}
+\newcommand{\mtN}{\textcolor{black!55}{\textsf{none}}}
+\newcommand{\mech}[1]{\textsf{\textbf{#1}}}
+\newcommand{\qn}[1]{\par\smallskip\noindent\textbf{#1}\ }
+
+\setlist{itemsep=2pt,topsep=3pt}
+\renewcommand{\topfraction}{0.92}\renewcommand{\bottomfraction}{0.85}\renewcommand{\textfraction}{0.06}\renewcommand{\floatpagefraction}{0.88}
+\setcounter{topnumber}{3}\setcounter{bottomnumber}{2}\setcounter{totalnumber}{4}
+\renewcommand{\arraystretch}{1.15}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\newtcolorbox{rulebox}[1]{colback=qcF!4, colframe=qcF!60, boxrule=0.5pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt, fonttitle=\bfseries\small, title={#1}, fontupper=\small}
+\newtcolorbox{exbox}[1]{colback=black!3, colframe=black!35, boxrule=0.4pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt, fonttitle=\bfseries\small, coltitle=black, colbacktitle=black!8, title={#1}, fontupper=\small, before skip=6pt, after skip=6pt}
+
+\title{\textbf{AI+HPC versus Quantum Computing on the Same Scientific Problems:}\\[3pt]
+\Large Matched Tasks, Complete Costs and Conditional Opportunities}
+\author{Satoshi Matsuoka\\[2pt]
+\small RIKEN Center for Computational Science (R-CCS), Kobe, Japan}
+\date{\small 11 November 2026 (version 8.2)}
+\hypersetup{pdftitle={AI+HPC versus Quantum Computing on the Same Scientific Problems: Matched Tasks, Complete Costs and Conditional Opportunities}, pdfauthor={Satoshi Matsuoka}}
+
+\begin{document}
+\maketitle
+
+% =====================================================================
+\begin{abstract}
+\noindent
+Do advances in artificial intelligence (AI) and high-performance computing remove the need for quantum computers in science? Answering requires comparisons that fix the scientific output, the accuracy and the complete cost. We review quantum experiments, fault-tolerant resource estimates and classical methods across many-body physics, chemistry, materials and engineering simulation. Of \wTimeline{} device claims tracked, \wTLvalidation{} were answered at their validation benchmark and \wTLchallenged{} challenged on it, \wTLobservables{} at its reported observables and \wTLpartial{} in part, all by structured numerical or variational methods; \wTLcontested{} are contested and \wTLopen{} remain unmatched in the regimes tested. Neural methods also act as direct wavefunction solvers and support useful workflows through reusable predictions and reformulation. Source checks show why broad rankings are unreliable: classical baselines may use limited hardware or another accuracy criterion, while quantum estimates depend on state preparation, repeated executions and future error-corrected hardware. Recent compilations cut some chemistry estimates to hours on about a million physical qubits, but matched end-to-end comparisons remain incomplete. For engineering linear systems and fluid dynamics, no practical quantum advantage over a strong classical workflow is established: published estimates are dominated by conditioning, data access and readout, and the remaining proposals are conditional and polynomial. Quantum-native and high-dimensional problems with scalar outputs are the natural candidates. We provide a versioned evidence ledger, explicit resource models and the tests that would change each assessment. The result is a framework for judging contributions to scientific answers, not a ranking of computing paradigms.
+\end{abstract}
+
+\noindent\textbf{Keywords:} quantum advantage; fault-tolerant resource estimation; tensor networks; neural quantum states; quantum linear solvers; AI for science; benchmarking; high-performance computing
+
+\tableofcontents
+\newpage

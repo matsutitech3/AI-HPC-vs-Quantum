@@ -1,0 +1,23 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  xmode=log, ymode=log, width=0.72\textwidth, height=6.2cm,
+  xmin=1000, xmax=30000, ymin=1e3, ymax=1e8, xtick={1000,2000,5000,10000,20000}, xticklabels={1000,2000,5000,10000,20000},
+  xlabel={\footnotesize Bond dimension $M$ (or $D$)}, ylabel={\footnotesize CPU core-hours},
+  ticklabel style={font=\footnotesize}, grid=major, grid style={black!10},
+  legend style={font=\scriptsize, at={(0.98,0.02)}, anchor=south east, draw=black!25, fill=white}, legend cell align=left]
+\addplot[only marks, mark=square*, mark size=2.6pt, color=qcF] table[x=x,y=y] {figdata/dmrg_measured_G.dat};
+\addlegendentry{P450 model G, 41--43 orbitals (measured)}
+\addplot[only marks, mark=o, mark size=2.8pt, color=qcF, line width=1pt] table[x=x,y=y] {figdata/dmrg_estimated_X.dat};
+\addlegendentry{P450 model X, 58 orbitals (estimated in source)}
+\addplot[qcF, dashed] table[x=M,y=cpuh] {figdata/dmrg_plan.dat};
+\addlegendentry{$M^3$ scaling, planning scenario}
+\addplot[only marks, mark=triangle*, mark size=3pt, color=black!65] table[x=x,y=y] {figdata/dmrg_femoco_sweep.dat};
+\addlegendentry{FeMoco-76 UDMRG, one sweep (measured)}
+\input{figdata/dmrg_annot.tex}
+\end{axis}
+\end{tikzpicture}
+\caption[DMRG cost versus bond dimension]{DMRG cost for the P450 active spaces~\cite{goings2022}. Only model G was measured. Both model-X values are the source's own estimates from theoretical scaling, so they do not independently validate $M^3$ scaling, and the source gives no guarantee that $M=3000$ suffices. The dashed curve extends that scaling as a resource-planning scenario and is not evidence of a converged gap. The FeMoco-76 sweep~\cite{zhai2026} shows that budgets of this size are affordable; it does not show that a P450 spin gap converges at any particular $M$, since bond-dimension requirements are basis- and problem-dependent.}
+\label{fig:dmrg}
+\end{figure}

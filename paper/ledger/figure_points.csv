@@ -1,0 +1,124 @@
+fig,series,point_id,x,y,kind,bound,checks,label,anchor
+timeline,validation,E01,24.40867279894875,1,elapsed,point,x:entries:E01:elapsed_days:d_to_month,,west
+timeline,validation,E35,12.155059132720105,2,elapsed,point,x:entries:E35:elapsed_days:d_to_month,,west
+timeline,validation,E36,1.4126149802890933,3,elapsed,point,x:entries:E36:elapsed_days:d_to_month,,west
+timeline,validation,E24,0.5256241787122208,4,elapsed,point,x:entries:E24:elapsed_days:d_to_month,,west
+timeline,challenged,E34,9.658344283837057,5,elapsed,point,x:entries:E34:elapsed_days:d_to_month,,west
+timeline,challenged,E02,2.8252299605781865,6,elapsed,point,x:entries:E02:elapsed_days:d_to_month,,west
+timeline,observables,E03,0.39421813403416556,7,elapsed,point,x:entries:E03:elapsed_days:d_to_month,,west
+timeline,partial,E04,12.187910643889618,8,elapsed,point,x:entries:E04:elapsed_days:d_to_month,,west
+timeline,contested,E18,16.4257555847569,9,elapsed,point,x:entries:E18:elapsed_days:d_to_month,,west
+timeline,contested,E27,16.918528252299605,10,elapsed,point,x:entries:E27:elapsed_days:d_to_month,,west
+timeline,open,E05,19.54664914586071,11,elapsed,point,x:entries:E05:elapsed_days:d_to_month,,west
+timeline,open,E06,17.017082785808146,12,elapsed,point,x:entries:E06:elapsed_days:d_to_month,,west
+timeline,open,E07,11.366622864651774,13,elapsed,point,x:entries:E07:elapsed_days:d_to_month,,west
+timeline,open,E26,7.030223390275952,14,elapsed,point,x:entries:E26:elapsed_days:d_to_month,,west
+timeline,open,E23,3.515111695137976,15,elapsed,point,x:entries:E23:elapsed_days:d_to_month,,west
+timeline,open,E25,2.3324572930354797,16,elapsed,point,x:entries:E25:elapsed_days:d_to_month,,west
+dumbbell,q_est,R-HUB-66-s,3.4166666666666665,1,modelled_schedule,point,x:resources:R-HUB-66-s:runtime_s:s_to_h,,west
+dumbbell,q_par,R-HUB-66-p,0.44166666666666665,1,modelled_schedule_parallel,point,x:resources:R-HUB-66-p:runtime_s:s_to_h,,west
+dumbbell,c_est,C-S2-U4-6x6,61.111111111111114,1,estimated_4core_dmrg,point,x:values:C-S2-U4-6x6:value:s_to_h,"61\,h",south
+dumbbell,q_est,R-HUB-1010-s,29.166666666666668,2,modelled_schedule,point,x:resources:R-HUB-1010-s:runtime_s:s_to_h,,west
+dumbbell,q_par,R-HUB-1010-p,4.055555555555555,2,modelled_schedule_parallel,point,x:resources:R-HUB-1010-p:runtime_s:s_to_h,,west
+dumbbell,c_est,C-S2-U4-10x10,1972222.2222222222,2,estimated_4core_dmrg,point,x:values:C-S2-U4-10x10:value:s_to_h,"$\sim$225\,y",south
+dumbbell,q_est,R-HEIS-1010-s,15.666666666666666,3,modelled_schedule,point,x:resources:R-HEIS-1010-s:runtime_s:s_to_h,,west
+dumbbell,q_par,R-HEIS-1010-p,1.2,3,modelled_schedule_parallel,point,x:resources:R-HEIS-1010-p:runtime_s:s_to_h,,west
+dumbbell,c_est,C-S1-J0.5-10x10,21.944444444444443,3,estimated_4core_dmrg,point,x:values:C-S1-J0.5-10x10:value:s_to_h,"22\,h",south
+dumbbell,q_est,R-FEMO76-DC-minvol,5.26,4,expected_runtime,point,x:resources:R-FEMO76-DC-minvol:runtime_s:s_to_h,"5.3\,h",north
+dumbbell,q_par,R-FEMO76-DC-fastest,2.5,4,expected_runtime,point,x:resources:R-FEMO76-DC-fastest:runtime_s:s_to_h,,west
+dumbbell,c_est,C-FEMO76-ideal,22.9,4,ideal_not_run,point,x:values:C-FEMO76-ideal:value:identity,"22.9\,h",south
+dumbbell,q_est,R-P450-2022,73.05555555555556,5,per_run,point,x:resources:R-P450-2022:runtime_s:s_to_h,"2022: 25--73\,h",north
+dumbbell,q_est,R-P450-2022-p5,25.0,5,per_run,point,x:resources:R-P450-2022-p5:runtime_s:s_to_h,,west
+dumbbell,q_par,R-P450-DC-minvol,1.88,5,expected_runtime,point,x:resources:R-P450-DC-minvol:runtime_s:s_to_h,"2026: 1.1--1.9\,h",south
+dumbbell,q_par,R-P450-DC-fast,1.11,5,expected_runtime,point,x:resources:R-P450-DC-fast:runtime_s:s_to_h,,west
+dumbbell,c_est,C-P450-wall,720.0,5,estimated_in_source,point,x:values:C-P450-wall:value:identity,$\sim$1 month,south
+hubbard,U1,U1-4x4,16,8.8,estimated_dmrg_4core,point,y:values:C-S2-U1-4x4:value:identity,,west
+hubbard,strip_U1,U1-4x8,32,410.0,estimated_dmrg_4core,point,y:values:C-S2-U1-4x8:value:identity,,west
+hubbard,strip_U1,U1-4x16,64,4800.0,estimated_dmrg_4core,point,y:values:C-S2-U1-4x16:value:identity,,west
+hubbard,U4,U4-4x4,16,36.0,estimated_dmrg_4core,point,y:values:C-S2-U4-4x4:value:identity,,west
+hubbard,strip_U4,U4-4x8,32,1500.0,estimated_dmrg_4core,point,y:values:C-S2-U4-4x8:value:identity,,west
+hubbard,U4,U4-6x6,36,220000.0,estimated_dmrg_4core,point,y:values:C-S2-U4-6x6:value:identity,,west
+hubbard,U4,U4-8x8,64,1500000000.0,estimated_dmrg_4core,point,y:values:C-S2-U4-8x8:value:identity,,west
+hubbard,U4,U4-10x10,100,7100000000.0,estimated_dmrg_4core,point,y:values:C-S2-U4-10x10:value:identity,,west
+hubbard,strip_U4,U4-4x16,64,12000.0,estimated_dmrg_4core,point,y:values:C-S2-U4-4x16:value:identity,,west
+hubbard,U8,U8-4x4,16,160.0,estimated_dmrg_4core,point,y:values:C-S2-U8-4x4:value:identity,,west
+hubbard,strip_U8,U8-4x8,32,2000.0,estimated_dmrg_4core,point,y:values:C-S2-U8-4x8:value:identity,,west
+hubbard,U8,U8-6x6,36,7400.0,estimated_dmrg_4core,point,y:values:C-S2-U8-6x6:value:identity,,west
+hubbard,U8,U8-8x8,64,94000.0,estimated_dmrg_4core,point,y:values:C-S2-U8-8x8:value:identity,,west
+hubbard,U8,U8-10x10,100,370000000.0,estimated_dmrg_4core,point,y:values:C-S2-U8-10x10:value:identity,,west
+hubbard,strip_U8,U8-4x16,64,9900.0,estimated_dmrg_4core,point,y:values:C-S2-U8-4x16:value:identity,,west
+hubbard,qpe_s,R-HUB-66-s,36,12300.0,modelled_schedule,point,y:resources:R-HUB-66-s:runtime_s:identity,,west
+hubbard,qpe_s,R-HUB-1010-s,100,105000.0,modelled_schedule,point,y:resources:R-HUB-1010-s:runtime_s:identity,,west
+hubbard,qpe_p,R-HUB-66-p,36,1590.0,modelled_schedule_parallel,point,y:resources:R-HUB-66-p:runtime_s:identity,,west
+hubbard,qpe_p,R-HUB-1010-p,100,14600.0,modelled_schedule_parallel,point,y:resources:R-HUB-1010-p:runtime_s:identity,,west
+femoco54,prior,R-FEMO54-DF,5900000.0,1438.888888888889,expected,point,x:resources:R-FEMO54-DF:physical_qubits:identity;y:resources:R-FEMO54-DF:runtime_s:s_to_h,,west
+femoco54vol,prior,R-FEMO54-DF,1,8500.0,copied,point,y:resources:R-FEMO54-DF:st_volume_Mqh:identity,DF,west
+femoco54,prior,R-FEMO54-THC,3900000.0,71.94444444444444,expected,point,x:resources:R-FEMO54-THC:physical_qubits:identity;y:resources:R-FEMO54-THC:runtime_s:s_to_h,,west
+femoco54vol,prior,R-FEMO54-THC,2,280.0,copied,point,y:resources:R-FEMO54-THC:st_volume_Mqh:identity,THC,west
+femoco54,prior,R-FEMO54-DFTHC,3200000.0,3.0,expected,point,x:resources:R-FEMO54-DFTHC:physical_qubits:identity;y:resources:R-FEMO54-DFTHC:runtime_s:s_to_h,,west
+femoco54vol,prior,R-FEMO54-DFTHC,3,8.6,copied,point,y:resources:R-FEMO54-DFTHC:st_volume_Mqh:identity,DFTHC,west
+femoco54,dense,R-FEMO54-compact,88840.0,671.0,expected,point,x:resources:R-FEMO54-compact:physical_qubits:identity;y:resources:R-FEMO54-compact:runtime_s:s_to_h,,west
+femoco54vol,dense,R-FEMO54-compact,4,59.6,copied,point,y:resources:R-FEMO54-compact:st_volume_Mqh:identity,compact,west
+femoco54,dense,R-FEMO54-balanced,196200.0,22.8,expected,point,x:resources:R-FEMO54-balanced:physical_qubits:identity;y:resources:R-FEMO54-balanced:runtime_s:s_to_h,,west
+femoco54vol,dense,R-FEMO54-balanced,5,4.47,copied,point,y:resources:R-FEMO54-balanced:st_volume_Mqh:identity,balanced,west
+femoco54,dense,R-FEMO54-efficient,1149000.0,1.13,expected,point,x:resources:R-FEMO54-efficient:physical_qubits:identity;y:resources:R-FEMO54-efficient:runtime_s:s_to_h,,west
+femoco54vol,dense,R-FEMO54-efficient,6,1.3,copied,point,y:resources:R-FEMO54-efficient:st_volume_Mqh:identity,efficient,west
+femoco54,dense,R-FEMO54-fast,2002000.0,0.794,expected,point,x:resources:R-FEMO54-fast:physical_qubits:identity;y:resources:R-FEMO54-fast:runtime_s:s_to_h,,west
+femoco54vol,dense,R-FEMO54-fast,7,1.59,copied,point,y:resources:R-FEMO54-fast:st_volume_Mqh:identity,fast,west
+femoco76,dense,R-FEMO76-DC-minq,104700.0,42200.0,expected,point,x:resources:R-FEMO76-DC-minq:physical_qubits:identity;y:resources:R-FEMO76-DC-minq:runtime_s:s_to_h,,west
+femoco76,dense,R-FEMO76-DC-low,166900.0,716.0,expected,point,x:resources:R-FEMO76-DC-low:physical_qubits:identity;y:resources:R-FEMO76-DC-low:runtime_s:s_to_h,,west
+femoco76,dense,R-FEMO76-DC-day,444000.0,23.9,expected,point,x:resources:R-FEMO76-DC-day:physical_qubits:identity;y:resources:R-FEMO76-DC-day:runtime_s:s_to_h,,west
+femoco76,dense,R-FEMO76-DC-minvol,1170000.0,5.26,expected,point,x:resources:R-FEMO76-DC-minvol:physical_qubits:identity;y:resources:R-FEMO76-DC-minvol:runtime_s:s_to_h,,west
+femoco76,dense,R-FEMO76-DC-fast,2543000.0,2.64,expected,point,x:resources:R-FEMO76-DC-fast:physical_qubits:identity;y:resources:R-FEMO76-DC-fast:runtime_s:s_to_h,,west
+femoco76,dense,R-FEMO76-DC-fastest,2692000.0,2.5,expected,point,x:resources:R-FEMO76-DC-fastest:physical_qubits:identity;y:resources:R-FEMO76-DC-fastest:runtime_s:s_to_h,,west
+p450dc,dense,R-P450-DC-minq,81130.0,10800.0,expected,point,x:resources:R-P450-DC-minq:physical_qubits:identity;y:resources:R-P450-DC-minq:runtime_s:s_to_h,,west
+p450dc,dense,R-P450-DC-month,96640.0,658.0,expected,point,x:resources:R-P450-DC-month:physical_qubits:identity;y:resources:R-P450-DC-month:runtime_s:s_to_h,,west
+p450dc,dense,R-P450-DC-day,223300.0,22.6,expected,point,x:resources:R-P450-DC-day:physical_qubits:identity;y:resources:R-P450-DC-day:runtime_s:s_to_h,,west
+p450dc,dense,R-P450-DC-minvol,1029000.0,1.88,expected,point,x:resources:R-P450-DC-minvol:physical_qubits:identity;y:resources:R-P450-DC-minvol:runtime_s:s_to_h,,west
+p450dc,dense,R-P450-DC-fast,2181000.0,1.11,expected,point,x:resources:R-P450-DC-fast:physical_qubits:identity;y:resources:R-P450-DC-fast:runtime_s:s_to_h,,west
+p450dc,prior,R-P450-2022,4624440.0,73.05555555555556,per_run,point,x:resources:R-P450-2022:physical_qubits:identity;y:resources:R-P450-2022:runtime_s:s_to_h,,west
+p450dc,prior,R-P450-2022-p5,500000.0,25.0,per_run,point,x:resources:R-P450-2022-p5:physical_qubits:identity;y:resources:R-P450-2022-p5:runtime_s:s_to_h,,west
+dmrg,measured_G,C-P450-G1500,1500.0,1800.0,measured,point,y:values:C-P450-G1500:value:identity,,west
+dmrg,estimated_X,C-P450-X1500,1500.0,4570.0,estimated,point,y:values:C-P450-X1500:value:identity,,west
+dmrg,estimated_X,C-P450-X3000,3000.0,36564.0,estimated,point,y:values:C-P450-X3000:value:identity,,west
+dmrg,femoco_sweep,C-FEMO76-sweep,18000.0,317440.0,measured,point,y:values:C-FEMO76-sweep:value:identity,,west
+rates,T,R-TFIM-ns4,4285714.285714285,1,effective_rate,point,x:resources:R-TFIM-ns4:n_nc/runtime_s:identity,,west
+rates,T,R-TFIM-ns3,2181818.1818181816,2,effective_rate,point,x:resources:R-TFIM-ns3:n_nc/runtime_s:identity,,west
+rates,T,R-RU-ns4,205323.19391634982,3,effective_rate,point,x:resources:R-RU-ns4:n_nc/runtime_s:identity,,west
+rates,T,R-RU-ns3,102661.59695817491,4,effective_rate,point,x:resources:R-RU-ns3:n_nc/runtime_s:identity,,west
+rates,T,R-TFIM-us4,2857.1428571428573,5,effective_rate,point,x:resources:R-TFIM-us4:n_nc/runtime_s:identity,,west
+rates,T,R-RU-us4,131.70731707317074,6,effective_rate,point,x:resources:R-RU-us4:n_nc/runtime_s:identity,,west
+rates,CCZ,R-P450-2022,29657.794676806083,7,effective_rate,point,x:resources:R-P450-2022:n_nc/runtime_s:identity,,west
+rates,CCZ,R-FEMO54-THC-layout,25868.72586872587,8,effective_rate,point,x:resources:R-FEMO54-THC-layout:n_nc/runtime_s:identity,,west
+platform,TFIM,R-TFIM-us3,1,1740.0,per_execution,point,y:resources:R-TFIM-us3:runtime_s:identity,,west
+platform,RU,R-RU-us3,1,8200000000.0,per_execution,point,y:resources:R-RU-us3:runtime_s:identity,,west
+platform,TFIM,R-TFIM-us4,2,840.0,per_execution,point,y:resources:R-TFIM-us4:runtime_s:identity,,west
+platform,RU,R-RU-us4,2,4100000000.0,per_execution,point,y:resources:R-RU-us4:runtime_s:identity,,west
+platform,TFIM,R-TFIM-ns3,3,1.1,per_execution,point,y:resources:R-TFIM-ns3:runtime_s:identity,,west
+platform,RU,R-RU-ns3,3,5260000.0,per_execution,point,y:resources:R-RU-ns3:runtime_s:identity,,west
+platform,TFIM,R-TFIM-ns4,4,0.56,per_execution,point,y:resources:R-TFIM-ns4:runtime_s:identity,,west
+platform,RU,R-RU-ns4,4,2630000.0,per_execution,point,y:resources:R-RU-ns4:runtime_s:identity,,west
+resmap,T_point,R-TFIM-ns4,230.0,2400000.0,per_execution,point,x:resources:R-TFIM-ns4:logical_qubits:identity;y:resources:R-TFIM-ns4:n_nc:identity,"2D TFIM dynamics, per execution",west
+resmap,T_point,R-RU-ns4,2740.0,540000000000.0,per_execution,point,x:resources:R-RU-ns4:logical_qubits:identity;y:resources:R-RU-ns4:n_nc:identity,Ru CO$_2$ catalyst,north
+resmap,T_point,R-RSA,25481.0,15000000000.0,per_execution,point,x:resources:R-RSA:logical_qubits:identity;y:resources:R-RSA:n_nc:identity,RSA-2048,west
+resmap,Toff_point,R-XAS-circ,100.0,354000000.0,longest_circuit,point,x:resources:R-XAS-circ:logical_qubits:identity;y:resources:R-XAS-circ:n_nc:identity,"XAS, longest circuit (min.\ workspace)",west
+resmap,Toff_point,R-FEMO54-THC-lee,2142.0,5300000000.0,per_run,point,x:resources:R-FEMO54-THC-lee:logical_qubits:identity;y:resources:R-FEMO54-THC-lee:n_nc:identity,"FeMoco-54 (Reiher), THC",north west
+resmap,Toff_point,R-FEMO76-THC,2196.0,32000000000.0,per_run,point,x:resources:R-FEMO76-THC:logical_qubits:identity;y:resources:R-FEMO76-THC:n_nc:identity,"FeMoco-76 (Li), THC",west
+resmap,Toff_point,R-P450-FULL,9000.0,1500000000000.0,per_run,point,x:resources:R-P450-FULL:logical_qubits:identity;y:resources:R-P450-FULL:n_nc:identity,P450 $\sim$500-orbital model,south east
+gauge,lo,R-SU3-KN-lo,6.5e+48,1,range_lo,point,x:resources:R-SU3-KN:n_nc:identity,Kan-Nam electric Trotter,west
+gauge,hi,R-SU3-KN-hi,6.5e+48,1,range_hi,point,x:resources:R-SU3-KN:n_nc:identity,Kan-Nam electric Trotter,west
+gauge,lo,R-SU3-LCU-lo,100000000000.0,2,range_lo,point,x:resources:R-SU3-LCU:n_nc:identity,Electric-basis LCU,west
+gauge,hi,R-SU3-LCU-hi-hi,100000000000000.0,2,range_hi,point,x:resources:R-SU3-LCU-hi:n_nc:identity,Electric-basis LCU,west
+gauge,lo,R-SU3-KRY-lo,1000000000.0,3,range_lo,point,x:resources:R-SU3-KRY:n_nc:identity,Large-Nc / Krylov truncations,west
+gauge,hi,R-SU3-KRY-hi-hi,1000000000000.0,3,range_hi,point,x:resources:R-SU3-KRY-hi:n_nc:identity,Large-Nc / Krylov truncations,west
+sqd,dets,V-QSCI-dets,1,50551.0,copied,point,y:values:V-QSCI-dets:value:identity,QSCI,west
+sqd,dets,V-HCI-dets,2,4260.0,copied,point,y:values:V-HCI-dets:value:identity,HCI,west
+sqd,rate,V-N2-rate-1e3,1000.0,0.1,copied,point,y:values:V-N2-rate-1e3:value:identity,,west
+sqd,rate,V-N2-rate-1e9,1000000000.0,0.0005,copied,point,y:values:V-N2-rate-1e9:value:identity,,west
+sqd,samples,V-QSCI-samples,400000000000000.0,1,estimated,point,x:values:V-QSCI-samples:value:identity,,west
+funnel,screen,V-FUNNEL-1,32600000.0,1,copied,point,x:values:V-FUNNEL-1:value:identity,,west
+funnel,screen,V-FUNNEL-2,500000.0,2,copied,point,x:values:V-FUNNEL-2:value:identity,,west
+funnel,screen,V-FUNNEL-3,800.0,3,copied,point,x:values:V-FUNNEL-3:value:identity,,west
+funnel,screen,V-FUNNEL-4,150.0,4,copied,point,x:values:V-FUNNEL-4:value:identity,,west
+funnel,screen,V-FUNNEL-5,23.0,5,copied,point,x:values:V-FUNNEL-5:value:identity,,west
+funnel,new,V-FUNNEL-6,18.0,6,copied,point,x:values:V-FUNNEL-6:value:identity,,west

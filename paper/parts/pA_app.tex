@@ -1,0 +1,126 @@
+% =====================================================================
+\appendix
+
+\section{Glossary}
+\label{app:glossary}
+{\small
+\begin{longtable}{@{}L{3.4cm} L{7.1cm} L{5.2cm}@{}}
+\toprule Term & Plain-language meaning & Why it matters here\\ \midrule\endhead
+\bottomrule\endfoot
+Quantum advantage & Better cost or capability for a stated output, accuracy and classical comparator & There is no unqualified winner\\
+Physical and logical qubits & Many physical devices are combined to protect one logical qubit against errors & Resource counts differ by orders of magnitude\\
+Fault tolerance & Error correction that sustains a long computation at a stated failure rate & Distinct from today's error-mitigated experiments\\
+Error mitigation & Estimating a less noisy result from extra noisy runs and a noise model & Bias and measurement overhead matter\\
+Phase estimation (QPE) & A quantum procedure that estimates energies from a prepared state's spectral content & One run need not find the wanted state\\
+Spectral weight, overlap & How much of the prepared state lies in the wanted energy region & Sets the probability of a useful run\\
+One-shot and expected runtime & Time for one execution; time including repeats after detected failure & Retries must be counted once\\
+Magic-state factory & An error-corrected subroutine that supplies the resource for costly logical gates & Can occupy most physical qubits\\
+T, Toffoli, CCZ & Different costly gate types used in compilation & Counts are not interchangeable\\
+Code cycle, reaction time & The clock of error correction; the delay of the classical controller & Set how fast logical gates can run\\
+Tensor network & A compressed representation of a many-body state or computation that exploits structure & Classical cost depends on geometry and entanglement\\
+DMRG, bond dimension & A variational tensor-network solver; the bond dimension sets the size of the representation & Accuracy and cost depend on convergence in it\\
+Neural quantum state & A trainable wavefunction optimized directly for a Hamiltonian & A direct solver, not a surrogate trained on labels\\
+Sign problem, sign-free & Statistical cancellation that makes Monte Carlo costly; absent in special cases & Changes the classical baseline\\
+Active space & The electrons and orbitals treated explicitly in a chemistry model & A model result is not the molecule or enzyme\\
+Chemical accuracy & An energy scale near 1\,kcal/mol, about 1.6\,mHa & The observable may need another tolerance\\
+XEB & A score comparing measured outputs with ideal circuit probabilities & Matching it is not simulating the distribution\\
+OTOC, Loschmidt echo & Diagnostics of how quantum dynamics spreads or reverses information & The observable, not the full state, is the task\\
+Amortization & Paying a data and training cost once and reusing the result & Workload size changes the comparison\\
+Condition number & Ratio of a matrix's largest to smallest singular value & Sets the cost of quantum linear solvers; grows with mesh refinement\\
+HHL, QSVT & Quantum algorithms that prepare a state proportional to $A^{-1}b$ & Fast in size, slow in condition number and readout\\
+Block encoding & Embedding a matrix inside a quantum circuit so that it can be applied & Its cost and scaling factor enter the total\\
+Carleman linearization & Rewriting a nonlinear equation as a larger linear one & Efficient only for weak nonlinearity\\
+Multigrid & A classical solver whose cost is proportional to the number of unknowns & The incumbent for elliptic problems\\
+Query complexity & Number of input lookups, with other computation free & Does not determine total runtime\\
+\end{longtable}
+}
+
+% =====================================================================
+\section{Evidence entries}
+\label{app:entries}
+Table~\ref{tab:master} lists every entry. An entry is a pairing: the same Hamiltonian, circuit family, molecule, material or optimization class addressed on quantum hardware or in a fault-tolerant estimate, and by a classical method; or a theoretical result that bears directly on such a pair; or, as context, an AI result commonly cited as making quantum computing unnecessary. Stated assumptions: agreement is categorized by the kind of match (Section~\ref{sec:match}); fault-tolerant estimates are not yet subject to engineering losses; roadmap figures are announced targets; and where only parallel progress exists we infer no winner.
+
+\input{figs/tab_master.tex}
+
+% =====================================================================
+\section{Forward records}
+\label{app:forward}
+Each of the \nClasses{} problem classes has two independent records, present comparative status and resource coverage (Section~\ref{sec:types}), and three statements of the evidence that would change it. A class takes the least mature coverage label among the records its statement depends on. ``Not applicable'' means that no resource-comparison label is assigned to that record; it does not mean that resource accounting is unnecessary. A trigger has a fixed target: moving from half filling to doping, from a proteome to a fragment, or from a full field to one scalar opens a new record and does not reverse the old one. A classical estimate that fails reopens a comparison; it does not establish a quantum result. The six screens of Table~\ref{tab:checklist} organize the evidence; they are not sequential gates and none is an exclusion proof. The classes are not independent units: several share sources, Hamiltonians or nested scopes, linked by the task-family field of the ledger, and classes 34 and 35 are placed in Fig.~\ref{fig:grid} by their full-field sub-task.
+
+\input{figs/tab_checklist.tex}
+\input{figs/fig_grid.tex}
+\input{figs/tab_forward.tex}
+
+% =====================================================================
+\section{Resource models, records and further figures}
+\label{app:models}
+
+\paragraph{Rows shown in Fig.~\ref{fig:dc76}.} The rows are from Table~XXVII of the dense-code compilation (physical error rate $10^{-3}$, 1\,$\mu$s code cycle, 10\,$\mu$s reaction time). From left to right: the minimum-qubit row, the rows the source highlights as running within a month and within a day, the minimum-volume row and the fastest tabulated row; for FeMoco a second fast row at \femoSevSelQ\,M qubits is also shown. The vertical axis is the source's expected runtime, which is the one-shot runtime divided by one minus the logical failure probability (its Sec.~VI.B). At the low-qubit end most shots fail: the minimum-qubit FeMoco row has a failure probability of \femoMinqPfail, so \femoMinqShot{} hours per shot become \femoMinqH{} expected hours. Spectral-hit repetitions, state preparation and the second spin state needed for a P450 gap are not included, and classical reference values are given in the text with their own scopes.
+
+\subsection{Runtime bounds and implied rates}
+In general a fault-tolerant execution is bounded below by its slowest required resource stream,
+\begin{equation}
+T_{\rm run}\ \gtrsim\ \max\!\left\{\frac{N_T}{R_T},\ \frac{N_{\rm CCZ}}{R_{\rm CCZ}},\ D_{\rm adapt}\,t_{\rm react},\ D_{\rm code}\,t_{\rm cycle},\ T_{\rm routing/readout}\right\},
+\label{eq:bottleneck}
+\end{equation}
+where $R_T$ and $R_{\rm CCZ}$ are the production rates of T and CCZ states, $D_{\rm adapt}$ the number of sequential reaction-dependent stages and $D_{\rm code}$ the logical depth in code cycles. State preparation, resets and outer repetitions come on top. Inverting published estimates gives the effective rates of Fig.~\ref{fig:rates}. A complete execution record would list
+$(Q_{\rm data}, Q_{\rm work}, Q_{\rm factory}, N_{\rm T}, N_{\rm CCZ}, D_{\rm adapt}, p_{\rm fail}, t_{\rm cycle}, t_{\rm react})$; most published estimates report a subset.
+
+\input{figs/fig_rates.tex}
+
+\subsection{Comparison with announced hardware targets}
+\label{app:vendor}
+Public hardware roadmaps provide scale references, not application schedules (Table~\ref{tab:vendor}). T counts, Toffoli counts and vendor ``operations'' are different units, and the vendor unit is not defined in the announcements. We therefore compare only under a named accounting convention and draw only one-sided conclusions about named compiled circuits.
+
+\begin{rulebox}{Convention X and bound logic}
+\textbf{Convention X (illustrative):} one vendor operation implements at most one counted non-Clifford gate (T or CCZ alike), with Clifford, routing and memory operations free. This is an accounting convention, not a property of any architecture. A source circuit's count is not a lower bound on every circuit for the same task.
+\begin{itemize}
+\item If a \emph{named compiled circuit} has count $N\ge L$ and $L>B$, that circuit does not fit budget $B$ under convention X or any costlier one: a count obstruction for that circuit.
+\item If $N\le U$ and $U\le B$, the count is within $B$ under convention X only; compatibility with a real architecture is \emph{not established}.
+\item A workload of many independent circuits is tested one circuit at a time. A cumulative count is comparable only with a cumulative budget, which the announcements do not state.
+\item A compiled width above the announced logical-qubit count, under the same width convention, is a width obstruction as compiled. A record with no reported width has unknown compatibility.
+\end{itemize}
+\end{rulebox}
+Logical error and circuit volume must also agree. Under an independent-failure model with failure probability $p_L$ per counted operation, $P(\text{success})\approx e^{-Gp_L}$, so $G=10^8$ operations at 99\% success need $p_L\lesssim10^{-10}$ and $G=10^9$ need $p_L\lesssim10^{-11}$.
+
+\input{figs/tab_vendor.tex}
+\input{figs/fig_resource.tex}
+
+\subsection{Break-even and output scenarios}
+Fig.~\ref{fig:quadratic} plots Eq.~(\ref{eq:tstar}). The cubic and quartic curves are sensitivities for hypothetical structured algorithms (\beCubic\,s and \beQuartic\,s at $t_Q=1$\,ms and $P=10^6$); they are not known search algorithms.
+
+\input{figs/fig_quadratic.tex}
+
+For output, suppose a receiver needs $N$ values of $b$ bits that are independent of everything it already holds, obtained from fresh preparations of an $n$-qubit state. Each shot yields at most $n$ classical bits, so
+\begin{equation}
+T^{\rm out}_Q \;\ge\; \frac{N\,b\,t_{\rm shot}}{n\,Q},\qquad T^{\rm out}_C \;\approx\; \frac{N\,b}{B_{\rm mem}},
+\label{eq:output}
+\end{equation}
+for $Q$ quantum devices and a classical memory bandwidth $B_{\rm mem}$. With $N=10^9$, $b=32$, $n=10^3$, $t_{\rm shot}=1$\,ms and $B_{\rm mem}=10^{12}$\,bits/s the floor is \outQ\,s per quantum device against \outC\,s of classical writing (Fig.~\ref{fig:readout}). The scenario is a conditional floor for one information model. A simulated field is a deterministic function of its inputs, so it need not carry $Nb$ bits of new information; a smooth field has a short description; and an algorithm that outputs selected observables is not subject to the floor.
+
+\input{figs/fig_readout.tex}
+
+\subsection{Resource records}
+\input{figs/tab_worked.tex}
+\noindent{\scriptsize $^\dagger$A secondary summary lists $\sim$4{,}900 logical qubits; not confirmed in the primary source and not used.}
+
+\subsection{Further figures for the chemistry, lattice and gauge cases}
+Fig.~\ref{fig:femoco} shows the frontier for the smaller FeMoco model and its history. Fig.~\ref{fig:sqd} gives the sampling limits of quantum-selected configuration interaction discussed in Section~\ref{sec:devices}. Fig.~\ref{fig:dmrg} shows how DMRG cost grows with bond dimension for the P450 models: with CPU time growing as the cube of the bond dimension, a value of 12{,}000 would cost \planCoreH{} core-hours and about \planMemTB\,TB of memory, a budget available at supercomputer scale, although whether that bond dimension converges the spin gap is a separate and empty evidence field. Fig.~\ref{fig:platform} shows how one fixed algorithm depends on the hardware scenario, and Fig.~\ref{fig:lgt} the spread of gauge-theory estimates.
+
+\input{figs/fig_femoco.tex}
+\input{figs/fig_sqd.tex}
+\input{figs/fig_dmrg.tex}
+\input{figs/fig_platform.tex}
+\input{figs/fig_lgt.tex}
+
+\subsection{The query-complexity result in detail}
+\label{app:query}
+\textbf{Statement.} Let $f$ be a real polynomial of degree at most $d\ge1$ in $N$ variables with $0\le f(x)\le1$ for all $x\in\{0,1\}^N$, and let its variance under the uniform measure be at least $\epsilon$. Then some variable has influence at least a fixed polynomial in $\epsilon/d$, with influence defined as in~\cite{aa2014}. This is Conjecture~1.7 of Aaronson and Ambainis; a proof was posted by Turturean on 6 November 2026~\cite{turturean2026,psi2026}.
+
+\textbf{Consequence.} By a theorem of the 2014 paper, the acceptance probability of any quantum algorithm making $T$ queries can then be approximated to within $\epsilon$, on all but a fraction $\delta$ of inputs, by a deterministic classical algorithm making at most $(4T)^8\epsilon^{-14}\delta^{-8}$ queries~\cite{turturean2026}. An earlier special case covers algorithms with a bounded number of parallel query rounds~\cite{bdst2026}, and equivalent statements hold for biased product and slice distributions~\cite{gmnr2026}.
+
+\textbf{Verification status.} Three layers. (i) The influence inequality is formalized in Lean~4; the repository reports no unfinished steps and no added axioms in the library, at commit \texttt{2a6ceae}. We read the formal statement, which matches the conjecture as printed, and did not rebuild the proof. (ii) That the formal statement is the conjecture is a human judgment; an expert exposition exists~\cite{blancexpo2026}, and Aaronson states that he believes the proof correct~\cite{aaronsonblog2026}. (iii) The query consequence follows through the peer-reviewed 2014 theorem and is not part of the formal development. The work is a preprint, and an earlier proof of the same conjecture, announced in 2019~\cite{aaronson2019}, was later found to contain an error. We record it as a claimed proof with a machine-checked core.
+
+\textbf{What ``polynomial'' is worth.} With $T=10^3$ and $\epsilon=\delta=0.1$ the bound is \aaBound{} classical queries. The purpose of the example is to separate an asymptotic upper bound from an operational cost: the theorem excludes an exponential separation in queries and says nothing about a practical crossover. It does not enter the break-even model.
+
+\textbf{How it was produced.} According to the author, the mathematical statements, the first draft and the formalization were produced by AI models in a research harness, using a non-public model; the author scoped the problem, reviewed the paper and takes responsibility for it~\cite{turturean2026,psi2026}. The mathematical artifact can be checked by anyone. The reported discovery run cannot be independently reproduced from the released artifacts, and the separate contributions of harness, model and author are not isolated.

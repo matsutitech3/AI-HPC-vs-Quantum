@@ -1,0 +1,94 @@
+% =====================================================================
+\section{How to compare the same answer}
+\label{sec:compare}
+
+\subsection{Four things to fix before comparing}
+A comparison is meaningful only when four things are stated for both sides.
+\begin{itemize}
+\item \textbf{The output.} A sample, a number such as an energy, a spectrum, a field on a grid, or a decision such as which material to synthesize.
+\item \textbf{The accuracy and the confidence.} A tolerance on the output and a statement of how often the procedure may fail. A phase-estimation run with a stated failure probability and a classical energy with an extrapolation range are different kinds of statement.
+\item \textbf{The workload.} One hard instance, or many related ones. Reuse changes the economics on both sides.
+\item \textbf{The complete cost.} Everything needed to deliver the output: preparation, compilation, calibration, repetitions and readout on the quantum side; training data, training, validation and post-processing on the classical side.
+\end{itemize}
+
+Two computations can address ``the same problem'' at three levels, and a verdict at one level does not transfer to another.
+\begin{enumerate}
+\item \textbf{Same mathematical task.} Identical Hamiltonian, circuit or data access, the same observable, tolerance and failure probability.
+\item \textbf{Same scientific decision.} Different models or methods that settle the same domain question at an acceptable, validated risk. Changing the question helps only if the replacement is adequate for the original purpose.
+\item \textbf{Workflow component.} Quantum data, learned screening and classical refinement combined, judged by what each part adds to the result.
+\end{enumerate}
+
+\subsection{What a classical ``match'' means}
+\label{sec:match}
+We distinguish three kinds of agreement and keep them apart in every figure and count.
+\begin{itemize}
+\item \textbf{Validation benchmark matched.} The classical method reproduces the statistic the experiment used to validate itself. The best-known statistic is the cross-entropy benchmark (XEB), a score that compares measured outputs with the ideal probabilities of a circuit. Matching it does not show that the full output distribution can be sampled efficiently.
+\item \textbf{Observables reproduced.} The classical method reproduces the reported physical quantities within the experiment's error bars, or more accurately against an independent reference.
+\item \textbf{Distribution simulated.} The classical method samples from the experiment's output distribution to a stated precision. No entry in our set reaches this level.
+\end{itemize}
+
+\subsection{Four types of evidence and seven status labels}
+\label{sec:types}
+We group the entries by the type of evidence they provide. The types are categories, not a ranking of quality.
+\begin{center}\small
+\begin{tabular}{@{}l L{8.2cm} r@{}}
+\toprule
+Type & What it contains & Entries\\\midrule
+Device comparison (E1) & A measurement on quantum hardware and a classical method evaluated on that task & \nEone\\
+Resource estimate (E2) & A modelled fault-tolerant quantum cost and a classical calculation or scaling law & \nEtwo\\
+Theory (E3) & A proven or conjectured separation, limit or dequantization & \nEthree\\
+Context (E4) & A classical or AI result with no matched quantum comparator & \nEfour\\
+\bottomrule
+\end{tabular}
+\end{center}
+Most resource-estimate comparisons in this paper (lattice models, P450, X-ray spectra) are recorded as forward-looking problem classes, not as entries, because no classical calculation has been run on the estimate's exact terms. Each class carries one of seven status labels. A \emph{standing claim} is a quantum advantage claim not yet matched on its own observable; it is not an established advantage. A claim can be \emph{contested}. A status can be a \emph{theoretical result}. A class is \emph{not compared} when no matched comparison exists at the stated task. A \emph{validated classical capability} is a demonstrated classical result with no matched quantum workflow; it is not a measured lead. A \emph{matched classical result} is scoped to one narrowly stated objective. A \emph{capability benchmark} has no application output. Separately we record how much of a quantum protocol a published estimate covers: complete (preparation, the target observable, repetitions and an error budget), partial, a scenario calculation, or none. Coverage is not validation. An estimate can cost every stage and still rest on an unmeasured overlap or an undemonstrated clock rate.
+
+\subsection{Which methods count as AI}
+We label a classical method by what it does. \emph{Learned} methods are neural networks or other trained models: neural quantum states, learned density functionals, graph networks, generative models. \emph{Structured numerical} methods use no learning: tensor networks, the density-matrix renormalization group (DMRG), Pauli-operator propagation, coupled cluster, selected configuration interaction, quantum Monte Carlo. Between them sit \emph{classical variational} methods such as Jastrow-type wavefunctions optimized by Monte Carlo. The appendix tables abbreviate these as AI, SC and CV. The labels are coding conventions and not disjoint species: DMRG is itself variational, and a neural quantum state is trained on the Schr\"odinger equation and not on data.
+
+\subsection{Why classical methods succeed where they do}
+\label{sec:why}
+
+\input{figs/fig_taxonomy.tex}
+
+In the device claims we reviewed, the classical response rarely came from AI being clever where quantum computing is brute force. More often the instance was easier than the worst case its quantum algorithm was designed for, and a structured method found and used that slack. Fig.~\ref{fig:taxonomy} sorts the explanations into four groups.
+
+\textbf{Hardware.} A logical quantum operation is many orders of magnitude slower than a classical one, so a quadratic speedup needs an enormous problem before it pays off~\cite{hoefler2023,babbush2021}. Section~\ref{sec:breakeven} gives the model. Structured speedups of higher degree are known exceptions~\cite{babbush2025}.
+
+\textbf{Information access.} A quantum algorithm that is fast once its input is loaded and before its output is read can lose its advantage at either end~\cite{aaronson2015,hoefler2023}. Linear solvers are the clearest case (Section~\ref{sec:linear}). Phase estimation depends in the same way on the overlap between a prepared state and the state sought (Section~\ref{sec:qpe}).
+
+\textbf{Baseline validity.} Three kinds of structure answered the device claims of Section~\ref{sec:devices}: tree-like correlations that belief propagation contracts efficiently~\cite{tindall2024}, limited growth of operators in the regime studied~\cite{begusic2024}, and boundary geometry that fixed the cost of contracting a circuit~\cite{manabe2026}. In chemistry, the hard part of one flagship model turned out to be ranking many states that are each close to a single configuration~\cite{zhai2026}, and Lee et al.\ find that features which make a state easy to prepare on a quantum computer also tend to make classical heuristics work~\cite{lee2023}. Some lattice instances have no sign problem for quantum Monte Carlo~\cite{hirsch1985}. Variational states, neural or not, are not limited by entanglement growth in the way matrix-product states are~\cite{mauron2025}. And some benchmarks have no application output at all. Where this evidence weakens depends on the method and the regime: doped and frustrated lattices, multireference active spaces where DMRG cost rises steeply~\cite{goings2022}, and long-time dynamics with high entanglement~\cite{bermejo2026}. A sign problem is a warning about one method, not a guarantee of quantum superiority.
+
+\textbf{Scientific adequacy.} A model trained once can serve many queries, and a learned reformulation can answer the scientific question without the original computation (Section~\ref{sec:ai}). Both hold only inside a validated domain.
+
+\subsection{The record behind the numbers}
+Every number in a figure or a ratio comes from a ledger of eight linked tables (Appendix~\ref{app:ledger}). A value may enter a figure only if we read it at a table or section of a source whose version is identified by the document itself: an arXiv identifier with its version number, or a journal reference. Values known only from an abstract or at second hand stay in the tables, may be quoted in the text with that level stated, and are refused by the validation script if a figure cites them. For each headline comparison we record the task, output, accuracy and cost conditions; missing details are marked explicitly, and a completeness table shows how many remain (Appendix~\ref{app:ledger}). The same scrutiny is applied to both sides. A quantum record should state its state-preparation assumptions, its repetitions, the bias of any error mitigation and the domain in which that mitigation was tested. A learned-model record should state the shift between training and target domains, the cost and source of its labels, its uncertainty calibration and its dependence on seed and optimizer.
+
+\subsection{The evidence in one table}
+Table~\ref{tab:summary} condenses the map to twelve rows. The full list of \nEntries{} entries is in Appendix~\ref{app:entries}.
+
+{\small
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}L{3.0cm} L{4.7cm} L{4.1cm} L{4.1cm}@{}}
+\caption{The evidence in brief, as of 11 November 2026. Identifiers refer to Appendix~\ref{app:entries} (entries) and Appendix~\ref{app:forward} (classes).}\label{tab:summary}\\
+\toprule
+Scientific task & Evidence obtained & What is unresolved & Next decisive test\\
+\midrule\endfirsthead
+\toprule
+Scientific task & Evidence obtained & What is unresolved & Next decisive test\\
+\midrule\endhead
+\bottomrule\endfoot
+Sampling benchmarks (E01, E02, E24--E26, E34--E36) & Four experiments answered at their validation statistic by tensor networks or a classical sampling algorithm and two challenged on it by mock-up samplers; the newest instances are unanswered & Efficient sampling of any full output distribution; later device generations & A classical response to the revised circuits, or fresh samples at stated fidelity\\
+Kicked-Ising dynamics, 127 qubits (E03) & Reported observables reproduced in 12 days by tensor networks and Pauli propagation on a laptop & Larger and deeper circuits of the same family & A converged classical result at 100 spins and the depth of the related fault-tolerant estimate\\
+Spin-glass quench dynamics on an annealer (E04) & Classical errors below the device in some regimes; other observables and lattices not reproduced & Three-dimensional lattices at long times; high-order correlations & Stable long-time variational or tensor-network dynamics at the claimed scales\\
+Coherent dynamics on gate-model devices (E05--E07, E23) & Four claims with no converged classical method in the hardest regime tested; classical predictions disagree with each other in one & Whether the device results are accurate there; whether other classical methods converge & Validation across the hard regime with mitigation overhead costed; a converged classical reproduction\\
+Approximate optimization (E18, E27) & Two scaling claims, each contested by a wider classical solver portfolio & Scaling on a defined instance family under one runtime convention & A separation from the full portfolio with matched accounting\\
+Iron--sulfur clusters and embedded protein--ligand chemistry (E09, E28) & Hybrid workflows at scale with no advantage claimed; the circuit energy is classically computable for single-layer circuits & What the quantum samples add & An ablation that replaces quantum samples with classical ones\\
+Ground states of 2D Hubbard and Heisenberg models (classes 6, 7) & Modelled quantum schedules of hours to a day against DMRG estimates on four CPU cores & The best classical cost; the half-filled Hubbard model is free of the sign problem & A Monte Carlo, neural-state or parallel DMRG time on the same lattice and tolerance\\
+FeMoco and P450 energies (E10; classes 10, 11) & Classical energy of the 76-orbital model to about 1 kcal/mol by extrapolation; 2026 quantum estimates of 2.5 to 5.3 hours per accepted run on 1.2 to 2.7 million physical qubits & Overlap of the prepared state; repetitions; a spin gap needs two states; classical cost at matched confidence & A measured overlap and full protocol cost; a classical gap converged at a stated tolerance\\
+Core-level X-ray absorption (class 9) & A quantum estimate that covers preparation, sampling and the full spectrum: about \xasHours{} hours at an assumed 1\,MHz logical clock & Initial-state quality; the error model; the clock; the best classical spectrum & A classical spectrum for the same cluster; validated preparation\\
+Sparse linear systems, finite elements and fluid dynamics (E32, E33; class 38) & Limits to polynomial speedup for stated problems in fixed dimension; a partial estimate of $10^{21}$ to $10^{39}$ in qubits times T gates for the drag on a sphere; no practical advantage established & Conditional polynomial proposals for structured inputs and selected observables; high-dimensional and quantum-native linear problems & A complete estimate below a tuned classical solver at an industrial condition number; a classical spectral baseline for the compressed Navier--Stokes task\\
+Materials and molecular screening (E12--E14) & AI+HPC screens validated by synthesis and measurement; a learned functional at chemical accuracy on main-group benchmarks & Transition-metal and multireference cases where labels are scarce & A decision-critical electronic-structure bottleneck shown to dominate the error budget\\
+Neural wavefunctions for lattices, molecules and nuclei (E22, E29, E30) & Variational energies below DMRG on a frustrated lattice; nuclei to mass number 20 & Ansatz bias; cost at a fixed certified accuracy; no result on the instances of the quantum estimates & Neural-state results on those instances with convergence reported\\
+\end{longtable}
+}

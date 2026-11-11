@@ -1,0 +1,24 @@
+\begin{figure}[htbp]
+\centering
+\resizebox{\linewidth}{!}{\begin{tikzpicture}[gridcell/.style={font=\footnotesize\bfseries, text width=2.0cm, align=center, inner sep=1pt}]
+% background cells
+\fill[qcF!20] (0,0) rectangle (15.4,-1.05);
+\fill[qcF!14] (0,-1.05) rectangle (15.4,-2.1);
+\fill[qcF!7] (0,-2.1) rectangle (15.4,-3.15);
+\foreach \i in {0,...,6} {\foreach \j in {0,...,4} {
+  \draw[black!25] (\i*2.2,-\j*1.05) rectangle ++(2.2,-1.05);
+}}
+\input{figdata/forward_grid.tex}
+% axis labels
+\foreach \lab [count=\i from 0] in {standing claim, theoretical result, contested, not compared, validated classical capability, matched classical result (scoped), capability benchmark} {
+  \node[font=\scriptsize, text width=2.05cm, align=center, anchor=north] at (\i*2.2+1.1,-5.32) {\lab};
+}
+\foreach \lab [count=\j from 0] in {complete, partial, scenario, none, not applicable} {
+  \node[font=\scriptsize, anchor=east] at (-0.1,-\j*1.05-0.525) {\lab};
+}
+\node[font=\footnotesize\bfseries, anchor=north] at (7.7,-6.25) {Present comparative status};
+\node[font=\footnotesize\bfseries, rotate=90, anchor=south] at (-1.75,-2.625) {Resource coverage};
+\end{tikzpicture}}
+\caption[Forward classes on two independent axes]{The \nClasses{} problem classes (numbers as in Table~\ref{tab:forward}) placed on two independent axes. The shading only separates the three coverage rows and carries no other meaning. Cell contents are generated from \texttt{forward\_classes.csv}. The ``not compared / partial'' cell holds resource-estimated candidates whose classical comparison is unresolved. The single entry in the top row is complete in coverage at the logical level, with unvalidated assumptions. No column means ``classical lead'': ``validated classical capability'' records a demonstrated classical result with no matched quantum workflow. Classes 34--35 are placed by their full-field sub-task. The classes are not independent units; several share sources, Hamiltonians or nested scopes, linked by the task-family field of the ledger, so the cell counts are counts of coded labels and not a survey statistic.}
+\label{fig:grid}
+\end{figure}

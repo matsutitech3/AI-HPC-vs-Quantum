@@ -1,0 +1,30 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  xmode=log, ymode=log, width=0.68\textwidth, height=6.6cm,
+  xmin=12, xmax=130, ymax=3e10,
+  xtick={16,32,36,64,100}, xticklabels={16,32,36,64,100},
+  xlabel={\footnotesize Lattice sites (4$\times$4, 4$\times$8, 6$\times$6, 4$\times$16 and 8$\times$8, 10$\times$10)},
+  ylabel={\footnotesize Estimated time to $\Delta E=0.01$ (s)}, ymin=1, clip=false,
+  ticklabel style={font=\footnotesize}, grid=major, grid style={black!10},
+  legend style={font=\scriptsize, at={(0.02,0.98)}, anchor=north west, draw=black!25, fill=white}, legend cell align=left]
+\addplot[black!55, mark=square*, line width=0.9pt, mark size=2.2pt, dashed, mark options={solid}] table[x=x,y=y] {figdata/hubbard_U1.dat};
+\addlegendentry{DMRG, square, $U/t=1$}
+\addplot[qcF, mark=*, line width=1.2pt, mark size=2.4pt] table[x=x,y=y] {figdata/hubbard_U4.dat};
+\addlegendentry{DMRG, square, $U/t=4$}
+\addplot[qcU, mark=triangle*, line width=1.0pt, mark size=2.8pt, dashdotted, mark options={solid}] table[x=x,y=y] {figdata/hubbard_U8.dat};
+\addlegendentry{DMRG, square, $U/t=8$}
+\addplot[only marks, mark=o, mark size=2.6pt, qcF, line width=0.8pt] table[x=x,y=y] {figdata/hubbard_strip_U4.dat};
+\addlegendentry{strips $4\times8$, $4\times16$ (hollow, same shapes)}
+\addplot[only marks, mark=square, mark size=2.2pt, black!55, line width=0.8pt, forget plot] table[x=x,y=y] {figdata/hubbard_strip_U1.dat};
+\addplot[only marks, mark=triangle, mark size=2.8pt, qcU, line width=0.8pt, forget plot] table[x=x,y=y] {figdata/hubbard_strip_U8.dat};
+\addplot[only marks, mark=diamond*, mark size=3.6pt, qcQ] table[x=x,y=y] {figdata/hubbard_qpe_s.dat};
+\addlegendentry{QPE, 1 factory (modelled)}
+\addplot[only marks, mark=diamond, mark size=3.6pt, qcQ, line width=0.9pt] table[x=x,y=y] {figdata/hubbard_qpe_p.dat};
+\addlegendentry{QPE, 16 factories (modelled)}
+\end{axis}
+\end{tikzpicture}
+\caption[Half-filled Hubbard model: classical estimate and quantum model]{Half-filled two-dimensional Fermi--Hubbard model on cylinders. Filled symbols joined by lines (squares and a dashed line for $U/t=1$, circles and a solid line for $U/t=4$, triangles and a dash-dotted line for $U/t=8$): the source's estimated DMRG time, on four cores of one CPU, to a variational state within 0.01 of the extrapolated total energy, for square lattices (its Table~S2). Hollow symbols: narrow strips, which are far cheaper at equal site count and are not joined to the squares. Diamonds, filled and hollow: the source's modelled phase-estimation schedules at $U/t=4$ with one and with sixteen magic-state factories (its Table~S12)~\cite{yoshioka2024}. This instance has no sign problem for determinant and auxiliary-field quantum Monte Carlo~\cite{hirsch1985}; no Monte Carlo cost is shown because none has been compiled at this tolerance. Generated from the ledger.}
+\label{fig:hubbard}
+\end{figure}

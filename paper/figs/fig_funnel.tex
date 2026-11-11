@@ -1,0 +1,19 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  xbar, xmode=log, log origin=infty, width=0.72\textwidth, height=6.0cm,
+  xmin=5, xmax=3e8, y dir=reverse, ytick={1,...,6},
+  yticklabels={Generated (AI), Predicted stable (ML), Functional filter (ML), DFT + ML-MD (HPC), Practicality filter, Predicted new candidates},
+  yticklabel style={font=\footnotesize}, xlabel={\footnotesize Candidates remaining (log scale)},
+  xticklabel style={font=\footnotesize}, bar width=10pt, enlarge y limits=0.1,
+  nodes near coords, point meta=rawx, every node near coord/.append style={font=\scriptsize, anchor=west},
+  axis x line*=bottom, axis y line*=left, xmajorgrids, grid style={black!10}]
+\addplot[fill=qcN, draw=none, bar shift=0pt] table[x=x,y=y] {figdata/funnel_screen.dat};
+\addplot[fill=qcF, draw=qcQ, line width=0.3pt, bar shift=0pt, postaction={pattern=north east lines, pattern color=white}] table[x=x,y=y] {figdata/funnel_new.dat};
+\node[font=\scriptsize\itshape, anchor=west, align=left, black!80] at (axis cs:300,5.6) {after the screen (not in the 80 h):\\one family synthesized, structure\\and ionic conductivity measured};
+\end{axis}
+\end{tikzpicture}
+\caption[An AI+HPC workflow: solid-electrolyte screening]{A complete classical workflow: solid-electrolyte screening by machine-learned models, density functional theory and molecular dynamics on about 1{,}000 cloud virtual machines, from 32.6 million candidates to 18 predicted new compositions in under 80 hours of wall time~\cite{chen2024}. Plain bars are screening stages; the last bar, hatched, is the set of predicted new compositions. The step from 23 to 18 is a novelty filter against known compounds, not a validation rate. Synthesis and measurement of the Na$_x$Li$_{3-x}$YCl$_6$ series followed the screen and are a separate endpoint. No quantum processor was used. Stage counts are in \texttt{values.csv}.}
+\label{fig:funnel}
+\end{figure}

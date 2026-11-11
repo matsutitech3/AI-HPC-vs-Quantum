@@ -1,0 +1,22 @@
+name: Validate evidence ledger
+on:
+  push:
+    paths: ["paper/ledger/**", "paper/figdata/**"]
+  pull_request:
+    paths: ["paper/ledger/**", "paper/figdata/**"]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Rebuild the ledger tables
+        run: python3 paper/ledger/build_ledger.py
+      - name: Validate and regenerate figure data
+        run: python3 paper/ledger/make_figdata.py
+      - name: Negative tests
+        run: python3 paper/ledger/test_negative.py
+      - name: Generated files must be committed
+        run: git diff --exit-code -- paper/ledger paper/figdata

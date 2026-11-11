@@ -1,0 +1,23 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  xmode=log, ymode=log, width=0.66\textwidth, height=6.0cm,
+  xmin=1e6, xmax=1e21, ymin=1e-6, ymax=1e18,
+  xlabel={\footnotesize Independent information to deliver: $N$ values of 32 bits},
+  ylabel={\footnotesize Output time (s)},
+  ticklabel style={font=\footnotesize}, grid=major, grid style={black!10},
+  legend style={font=\scriptsize, at={(0.02,0.98)}, anchor=north west, draw=black!25, fill=white}, legend cell align=left]
+\addplot[qcF, line width=1.2pt] table[x=N,y=q_ms] {figdata/readout_curves.dat};
+\addlegendentry{quantum floor, $n=10^3$, $t_{\rm shot}=1$\,ms}
+\addplot[qcF!55, line width=1.1pt, dashed] table[x=N,y=q_us] {figdata/readout_curves.dat};
+\addlegendentry{quantum floor, $n=10^3$, $t_{\rm shot}=1\,\mu$s}
+\addplot[black!75, line width=1.2pt, dashdotted] table[x=N,y=c_node] {figdata/readout_curves.dat};
+\addlegendentry{classical node, $10^{12}$ bits/s}
+\draw[black!40, dashed] (axis cs:1e6,86400) -- (axis cs:1e21,86400) node[pos=0.98, above, anchor=south east, font=\scriptsize]{1 day};
+\draw[black!40, dashed] (axis cs:1e6,3.16e7) -- (axis cs:1e21,3.16e7) node[pos=0.98, above, anchor=south east, font=\scriptsize]{1 year};
+\end{axis}
+\end{tikzpicture}
+\caption[Output time under an information-rate scenario]{An information-rate scenario for output (Eq.~\ref{eq:output}): time to deliver $N$ independent 32-bit values from one quantum device by fresh preparations of a 1{,}000-qubit state, against writing them on one classical node. The scenario assumes that the receiver holds no information that shortens the description, which a deterministic simulated field need not satisfy. The curves exclude the solve on both sides, do not rank total runtimes and do not apply to algorithms that output selected observables. A formula figure; parameters in \texttt{models.csv}.}
+\label{fig:readout}
+\end{figure}

@@ -1,0 +1,16 @@
+\begin{table}[htbp]
+\centering\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Screening checklist. ``Unknown'' is always a permitted answer. Answers inform the two records of Fig.~\ref{fig:grid}; they do not by themselves decide a class.}\label{tab:checklist}
+\begin{tabular}{@{}L{3.1cm} >{\columncolor{qcF!10}}L{3.0cm} >{\columncolor{qcNl!40}}L{3.0cm} >{\columncolor{qcUl!60}}L{2.5cm} L{3.2cm}@{}}
+\toprule
+Screen & Supports quantum opportunity & Supports classical capability & Unknown & Evidence needed\\\midrule
+S1 Speedup on the actual instance family & Exponential or structured super-quadratic & Unstructured decision problem (polynomial query limit; quadratic search under the Sec.~\ref{sec:breakeven} model) & Speedup unproven for these instances & Algorithm analysis on representative instances\\
+S2 Input and output & Few scalars or observables out; native quantum input & Bulk classical data in; full-state readout from an amplitude-encoded solution & Access model unstated & Loading model; estimator and shot count\\
+S3 Workload & One or few hard instances & Many moderate queries a validated surrogate amortizes & $K$ and surrogate adequacy unknown & $T_C(K)$, $T_Q(K)$ (Eqs.~\ref{eq:tck}--\ref{eq:tqk})\\
+S4 Adequacy & The question still needs this computation & A validated reformulation answers it & Validation domain unclear & Error budget (Eq.~\ref{eq:errbudget})\\
+S5 Classical structure & No tested classical method converges at relevant sizes & A structured, variational or neural method reaches the tolerance (incl.\ sign-free sectors) & Classical scaling not established & Converged SC, CV and AI baselines on the same instance\\
+S6 Resource evidence & Coverage \mtC{} with validated assumptions & --- & Partial, scenario or missing; assumptions unvalidated & Execution record (Appendix~\ref{app:models})\\
+\bottomrule
+\end{tabular}
+\end{table}
